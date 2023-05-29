@@ -1,0 +1,22 @@
+
+p {
+    font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.texto-sobre-mim{
+    text-indent: 50px;
+    text-align: justify;
+}
+.foto-perfil {
+    max-height: 150px ;
+    border-radius: 50%;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.corPrimaria {
+    background-color: #18bc9c;
+}
+

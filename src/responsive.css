@@ -1,0 +1,70 @@
+@media (max-width:780px) {
+    .tech-card {
+        max-width: 80px;
+    }
+}
+
+@media (max-width:725px) {
+    .navbar{
+        padding: 0;
+        margin: 0;  
+    }
+    .nave-container{
+        padding: 0;
+        margin: 0; 
+    }
+    .nav-texto {
+        font-size: 16px;
+        padding: 0;
+        margin: 0;
+    }
+    .nav-texto2{
+        display: none;
+        font-size: 16px;
+        padding: 0;
+        margin: 0;
+    }
+    .nav-ul{
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@media (max-width:570px) {
+    .tech-card {
+        max-width: 60px;
+    }
+}
+@media (max-width:490px) {
+.nav-texto {
+    display: none;
+}
+}
+
+@media (max-width:475px) {
+    .tech-card {
+        max-width: 100%;
+    }
+
+
+    .redes-sociais-menu {
+        font-size: 28px;
+    }
+
+    .aside-menu {
+        text-align: center;
+        font-size: 8px;
+    }
+
+    .container-contato-navbar {
+        max-width: 100%;
+        padding-right: 15%;
+        margin-left: 2%;
+    }
+}
+
+@media (min-width:475px) {
+    .container-contato-navbar {
+        margin-left: 3%;
+    }
+}

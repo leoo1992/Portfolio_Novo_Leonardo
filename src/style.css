@@ -1,22 +1,98 @@
-
-p {
+* {
     font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-.texto-sobre-mim{
-    text-indent: 50px;
-    text-align: justify;
-}
-.foto-perfil {
-    max-height: 150px ;
-    border-radius: 50%;
+    font-weight: 900;
+    text-shadow: 1px 1px 0px  black, 1px 1px 0px gray ;
 }
 
 html {
     scroll-behavior: smooth;
 }
 
-.corPrimaria {
-    background-color: #18bc9c;
+body {
+    background-color: rgb(70, 70, 70);
 }
 
+.corPrimaria {
+    background-color: rgba(255, 68, 0, 0.555);
+    border-radius: 35px;
+    margin-left: 2%;
+    margin-right: 2%;
+    border: 1px solid rgb(199, 138, 255);
+}
+h3 {
+    color: rgb(148, 91, 223);
+    font-weight: bold;
+    text-shadow: 1px 1px 0px  black;
+}
+
+/* NAVBAR */
+.navbar {
+    border-bottom: 1px solid orangered;
+    color: orangered;
+}
+
+#offcanvasDarkNavbar {
+    max-width: 70%;
+    min-width: 45%;
+    border-left: 1px solid orangered;
+}
+
+.offcanvas-title {
+    color: rgb(250, 161, 129);
+    font-weight: bold;
+    margin-left: 10% ;
+}
+
+.nav-texto {
+    color: rgb(250, 161, 129);
+    font-weight: bold;
+}
+
+.nav-texto2,
+.nav-texto3,
+.navbar-text{
+    color: rgb(199, 138, 255);
+    font-weight: bold;
+}
+
+.redes-sociais-menu {
+    font-size: 32px;
+}
+
+.aside-menu {
+    font-size: 9px;
+}
+
+.container-contato-navbar {
+    max-width: 100%;
+    padding-right: 10%;
+}
+
+/* FOTO PERFIL */
+.foto-perfil {
+    max-height: 150px;
+    border-radius: 50%;
+}
+
+/* SOBRE MIN */
+.texto-sobre-mim {
+    text-indent: 5%;
+    text-align: justify;
+}
+
+#sobre-mim {
+    border-radius: 35px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+
+/* PROJETOS */
+
+/* TECH */
+
+
+/* FOOTER */
+footer {
+    border-top: 1px solid orangered;
+}

@@ -1,6 +1,9 @@
 @media (max-width:780px) {
     .tech-card {
-        max-width: 80px;
+        max-width: 70px;
+    }
+    .techaside{
+        max-width: 100%;
     }
 }
 
@@ -32,10 +35,12 @@
 
 @media (max-width:570px) {
     .tech-card {
-        max-width: 60px;
+        max-width: 100%;
     }
 }
-@media (max-width:490px) {
+
+
+@media (max-width:500px) {
 .nav-texto {
     display: none;
 }
@@ -53,7 +58,7 @@
 
     .aside-menu {
         text-align: center;
-        font-size: 8px;
+        font-size: 12px;
     }
 
     .container-contato-navbar {
@@ -66,5 +71,9 @@
 @media (min-width:475px) {
     .container-contato-navbar {
         margin-left: 3%;
+    }
+    .aside-menu{
+        font-size: large ;
+        font-weight: 900;
     }
 }

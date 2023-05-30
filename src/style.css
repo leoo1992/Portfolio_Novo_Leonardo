@@ -1,7 +1,7 @@
 * {
     font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 900;
-    text-shadow: 1px 1px 0px  black, 1px 1px 0px gray ;
+    text-shadow: 1px 1px 0px black, 1px 1px 0px gray;
 }
 
 html {
@@ -11,7 +11,7 @@ html {
 }
 
 body {
-background-color: rgb(199, 138, 255);
+    background-color: rgb(199, 138, 255);
 }
 
 .corPrimaria {
@@ -21,18 +21,19 @@ background-color: rgb(199, 138, 255);
     margin-right: 2%;
     border: 3px solid rgb(199, 138, 255);
 }
-.corPrimaria:hover{
-    box-shadow: 0px 0px 25px rgb(255, 70, 2);
+
+.corPrimaria:hover {
+    box-shadow: 0px 0px 50px rgb(255, 115, 65);
     transition: 1s ease-in-out;
 }
 
-h3 {
-    color: rgb(148, 91, 223);
+h3, .ocultar{
+    color: rgb(255, 255, 255);
     font-weight: bold;
-    text-shadow: 1px 1px 0px  black;
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
 }
 
-/* NAVBAR */
+/* NAVBAR --------------------------------------*/
 .navbar {
     border-bottom: 1px solid orangered;
     color: orangered;
@@ -47,7 +48,7 @@ h3 {
 .offcanvas-title {
     color: rgb(250, 161, 129);
     font-weight: bold;
-    margin-left: 10% ;
+    margin-left: 10%;
 }
 
 .nav-texto {
@@ -57,7 +58,7 @@ h3 {
 
 .nav-texto2,
 .nav-texto3,
-.navbar-text{
+.navbar-text {
     color: rgb(199, 138, 255);
     font-weight: bold;
 }
@@ -75,7 +76,7 @@ h3 {
     padding-right: 10%;
 }
 
-.botao-menu{
+.botao-menu {
     object-position: center;
     align-items: center;
     align-self: center;
@@ -88,16 +89,18 @@ h3 {
     color: rgb(250, 161, 129);
     font-weight: bold;
 }
-.borda-menu{
+
+.borda-menu {
     box-shadow: 1px 1px 1px 1px rgb(250, 161, 129), -1px -1px 1px 1px rgb(250, 161, 129);
 }
 
-/* FOTO PERFIL */
+/* FOTO PERFIL --------------------------------*/
 .foto-perfil {
     max-height: 150px;
     border-radius: 50%;
 }
-.local-foto{
+
+.local-foto {
     object-position: center;
     align-items: center;
     align-self: center;
@@ -108,11 +111,7 @@ h3 {
     text-align: center;
 }
 
-.foto-container{
-    
-}
-
-/* SOBRE MIN */
+/* SOBRE MIN ---------------------------------*/
 .texto-sobre-mim {
     text-indent: 5%;
     text-align: justify;
@@ -124,20 +123,21 @@ h3 {
     margin-right: 2%;
 }
 
-/* PROJETOS */
+/* PROJETOS ----------------------------------*/
 
-/* TECH */
-.tech-card{
+/* TECH --------------------------------------*/
+.tech-card {
     border: 1px solid rgb(199, 138, 255);
-} 
+}
 
-.tech-card:hover{
+.tech-card:hover {
     box-shadow: 0px 0px 25px rgb(199, 138, 255);
     transition: 1s ease-in-out;
     cursor: pointer;
-} 
-/* CONTATO */
-/* FOOTER */
+}
+
+/* CONTATO -----------------------------------*/
+/* FOOTER ------------------------------------*/
 footer {
     border-top: 1px solid orangered;
 }

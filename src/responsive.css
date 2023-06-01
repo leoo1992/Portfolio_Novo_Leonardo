@@ -42,6 +42,7 @@
         padding: 0;
         margin: 0;
     }
+
     .coluna-centro-foto {
         min-width: 60%;
     }
@@ -51,16 +52,18 @@
     .tech-card {
         max-width: 100%;
     }
+
     .coluna-centro-foto {
         min-width: 70%;
     }
 }
 
 
-@media (max-width:500px) {
+@media (max-width:513px) {
     .nav-texto {
         display: none;
     }
+
     .coluna-centro-foto {
         min-width: 80%;
     }
@@ -70,7 +73,6 @@
     .tech-card {
         max-width: 100%;
     }
-
 
     .redes-sociais-menu {
         font-size: 28px;
@@ -84,18 +86,21 @@
     .container-contato-navbar {
         max-width: 100%;
         padding-right: 15%;
-        margin-left: 2%;
-    }
-}
-
-@media (min-width:475px) {
-    .container-contato-navbar {
         margin-left: 3%;
     }
 
+    .aside-menu-canvas {
+        font-size: 10px;
+        font-weight: 600;
+    }
+
     .aside-menu {
-        font-size: large;
+        font-size: small;
         font-weight: 900;
+    }
+
+    .texto-sobre {
+        font-size: 14px;
     }
 }
 
@@ -110,14 +115,33 @@
         min-width: 90%;
     }
 }
+
+@media (max-width:375px) {
+    .aside-menu {
+        font-size: 12;
+        font-weight: 500;
+    }
+
+    .aside-menu-canvas {
+        font-size: 8px;
+        font-weight: 100;
+    }
+}
+
 @media (max-width:320px) {
     .coluna-centro-foto {
         min-width: 100%;
         padding: 0px;
         margin: 0px;
     }
-    .ocultar{
+
+    .ocultar {
         display: none;
     }
-    
+
+    .aside-menu {
+        font-size: 10;
+        font-weight: 400;
+    }
+
 }

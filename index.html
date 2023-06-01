@@ -30,31 +30,30 @@
 
 <body class="text-white fw-bold">
     <!-- NAVBAR -->
-    <nav class="navbar navbar-dark bg-dark fixed-top p-1 m-0">
+    <nav class="navbar navbar-dark fixed-top p-1 m-0">
         <div class="nave-container container-fluid m-0 p-0">
 
             <ul class="nav nav-ul m-0 p-0">
-                <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#">
-                    <h6 class="nav-texto2">Leonardo Santos
-                        Custódio</h6>
+                <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#home">
+                    <h6 class="nav-texto2">Leonardo Santos</h6>
                 </a>
                 <li class="nav-item">
-                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#">
+                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#sobre-mim">
                         <h6 class="nav-texto">Sobre</h6>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#">
+                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#projetos">
                         <h6 class="nav-texto">Projetos</h6>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#">
+                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#tech">
                         <h6 class="nav-texto">Tecnologias</h6>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#">
+                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#contato">
                         <h6 class="nav-texto">Contato</h6>
                     </a>
                 </li>
@@ -67,24 +66,30 @@
                 <h6 class="botao-menu p-0 m-0">Menu</h6></span>
             </button>
             <!-- ACTIVE:BUTTON -->
-            <div class="offcanvas offcanvas-end text-white bg-dark border-2" tabindex="-1" id="offcanvasDarkNavbar"
+            <div class="offcanvas offcanvas-end text-white border-2" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <!-- HEADER NAV-->
                 <div class="offcanvas-header">
                     <h1 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h1>
-                    <button type="button" class="btn-close btn-close-white " data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <!-- BODY NAV-->
                 <div class="offcanvas-body ">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li>
+                            <a href="#home" class="nav-link">
+                                <h2 class="nav-texto3">Home</h2>
+                            </a>
+                        </li>
+                        <li>
                             <a href="#sobre-mim" class="nav-link">
+
                                 <h2 class="nav-texto3">Sobre mim</h2>
                             </a>
                         </li>
                         <li>
                             <a href="#projetos" class="nav-link">
+
                                 <h2 class="nav-texto3">Projetos</h2>
                             </a>
                         </li>
@@ -96,59 +101,62 @@
                     </ul>
                 </div>
                 <!-- FOOTER ASIDE NAV-->
-                <h1 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Contato :</h1>
                 <aside
-                    class="container container-contato-navbar text-center mb-5 pb-2 justify-content-center align-content-center text-center align-self-center align-items-center">
+                    class="container-contato-navbar mb-4 pb-0 container-fluid text-center justify-content-center align-content-center text-center align-self-center align-items-center">
+
+                    <a href="#contato" class="nav-link">
+                        <h1 class="offcanvas-title ">Contato :</h1>
+                    </a>
                     <div
-                        class="row justify-content-center align-content-center text-center align-self-center align-items-center">
-                        <div class="col card bg-dark border-0 b-0 p-0 ">
+                        class="row fs-1 justify-content-center align-content-center text-center align-self-center align-items-center">
+                        <div class="col border-0 b-0 p-0 ">
                             <a href="https://github.com/leoo1992" target="_blank" title="GitHub" rel="noopener"><i
-                                    class="redes-sociais-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-github text-white"></i></a>
+                                    class="redes-sociais-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-github"></i></a>
                             <h6
-                                class="me-1 aside-menu justify-content-center align-content-center text-center align-self-center align-items-center">
+                                class="me-1 aside-menu-canvas justify-content-center align-content-center text-center align-self-center align-items-center">
                                 GitHub</h6>
                         </div>
-                        <div class="col card bg-dark border-0 b-0 p-0 ">
+                        <div class="col border-0 b-0 p-0 ">
                             <a href="https://www.linkedin.com/in/leocustodio1992/" target="_blank" title="Linkedin"
                                 rel="noopener"><i
-                                    class="redes-sociais-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-linkedin text-white"></i></a>
+                                    class="redes-sociais-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-linkedin"></i></a>
                             <h6
-                                class="me-1 aside-menu justify-content-center align-content-center text-center align-self-center align-items-center">
+                                class="me-1 aside-menu-canvas justify-content-center align-content-center text-center align-self-center align-items-center">
                                 Linkedin</h6>
                         </div>
-                        <div class="col card bg-dark border-0 b-0 p-0 ">
+                        <div class="col border-0 b-0 p-0 ">
                             <a href="https://www.instagram.com/leocustodio1/" target="_blank" title="Instagram"
                                 rel="noopener"><i
-                                    class="redes-sociais-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-instagram text-white"></i></a>
+                                    class="redes-sociais-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-instagram"></i></a>
                             <h6
-                                class="me-1 aside-menu justify-content-center align-content-center text-center align-self-center align-items-center">
+                                class="me-1 aside-menu-canvas justify-content-center align-content-center text-center align-self-center align-items-center">
                                 Insta</h6>
                         </div>
-                        <div class="col card bg-dark border-0 b-0 p-0 ">
+                        <div class="col border-0 b-0 p-0 ">
                             <a href="https://www.facebook.com/Leonardo.lSantosl" target="_blank" title="Facebook"
                                 rel="noopener">
                                 <i
-                                    class="redes-sociais-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-facebook text-white"></i></a>
+                                    class="redes-sociais-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-facebook"></i></a>
                             <h6
-                                class="me-1 aside-menu justify-content-center align-content-center text-center align-self-center align-items-center">
+                                class="me-1 aside-menu-canvas justify-content-center align-content-center text-center align-self-center align-items-center">
                                 Face</h6>
                         </div>
-                        <div class="col card bg-dark border-0 b-0 p-0 ">
+                        <div class="col border-0 b-0 p-0 ">
                             <a href="./src/Leonardo Currículo.pdf" target="_blank" download title="Currículo"
                                 rel="noopener">
                                 <i
-                                    class="redes-sociais-menu justify-content-center align-content-center text-center align-self-center align-items-center fa-solid fa-file-pdf text-white"></i></a>
+                                    class="redes-sociais-menu justify-content-center align-content-center text-center align-self-center align-items-center fa-solid fa-file-pdf"></i></a>
                             <h6
-                                class="me-1 aside-menu justify-content-center align-content-center text-center align-self-center align-items-center">
+                                class="me-1 aside-menu-canvas justify-content-center align-content-center text-center align-self-center align-items-center">
                                 Currículo</h6>
                         </div>
-                        <div class="col card bg-dark border-0 b-0 p-0 ">
+                        <div class="col border-0 b-0 p-0 ">
                             <a href="https://wa.me/5548999971941?text=Ol%C3%A1+Leonardo+%21" target="_blank"
                                 target="_blank" title="Whattsapp" rel="noopener">
                                 <i
-                                    class="redes-sociais-menu justify-content-center align-content-center text-center align-self-center align-items-center fa-brands fa-whatsapp text-white"></i></a>
+                                    class="redes-sociais-menu justify-content-center align-content-center text-center align-self-center align-items-center fa-brands fa-whatsapp"></i></a>
                             <h6
-                                class="me-1 aside-menu justify-content-center align-content-center text-center align-self-center align-items-center">
+                                class="me-1 aside-menu-canvas justify-content-center align-content-center text-center align-self-center align-items-center">
                                 Whatts</h6>
                         </div>
                     </div>
@@ -156,19 +164,20 @@
             </div>
         </div>
     </nav>
+    <br id="home">
     <!-- FOTO -->
-    <section class="local-foto text-center pt-5">
+    <section class="local-foto text-center pt-5 m-0">
         <div
-            class="foto-container container-fluid pt-4 pb-3 justify-content-center align-content-center text-center align-self-center align-items-center">
+            class="foto-container container-fluid m-0 justify-content-center align-content-center text-center align-self-center align-items-center">
             <div class="row m-0 p-0">
                 <div class="col coluna m-0 p-0"></div>
                 <div
                     class="col-4 coluna-centro-foto corPrimaria m-0 p-3 justify-content-center align-content-center text-center align-self-center align-items-center">
-                    <img class="foto-perfil m-1 p-lg-1" src="./src/foto3x4.png" alt="Foto Perfil">
-                    <h3 class=" m-0 p-1 text-center">Leonardo Santos</h3>
+                    <img class="foto-perfil m-0 p-0" src="./src/foto3x4.png" alt="Foto Perfil">
+                    <h3 class=" m-0 p-0 text-center">Leonardo Santos</h3>
                     <h5>Desenvolvedor Front-end</h5>
                     <span>
-                        <a href="#contato" class="btn btn-dark fw-bold mt-1 m-1 p-1">Contato</a>
+                        <a href="#contato" class="btn-contato btn btn-dark fw-bold" id="sobre-mim">Contato</a>
                     </span>
                 </div>
                 <div class="col coluna m-0 p-0"></div>
@@ -177,115 +186,84 @@
     </section>
     <br>
     <!-- SOBRE MIM -->
-    <section class="text-center" id="sobre-mim">
+    <section class="p-3 corPrimaria ">
+        <h3 class="text-center">Sobre mim</h3>
         <div
-            class="container-fluid pb-3 justify-content-center align-content-center text-center align-self-center align-items-center">
-            <div class="row m-0 p-0">
-                <div class="col coluna m-0 p-0"></div>
-                <div
-                    class="col-11 coluna-centro-sobre corPrimaria p-3 m-0 justify-content-center align-content-center text-center align-self-center align-items-center">
-                    <h3 class="text-center">Sobre mim</h3>
-                    <p class="texto-sobre-mim m-1 text-light fs-6 fw-bold"> Me chamo Leonardo Santos Custódio, nasci em
-                        abril de
-                        1992, sou natural de Imbituba, Santa Catarina. Atualmente estou
-                        finalizando o curso Técnico em Desenvolvimento de Sistemas no SENAI de Criciúma, com formação
-                        para
-                        12/2023. Almejo em
-                        sequência iniciar uma faculdade de Engenharia de Software. Sei que tenho
-                        muito a agregar para área de tecnologia pos sou fascinado por sistemas e por tudo de amplo
-                        e inovador que podem transformar a nossa realidade.
-                    </p>
-                    <br>
-                </div>
-                <div class="col coluna m-0 p-0"></div>
+            class="container-fluid p-0 m-0 justify-content-center align-content-center align-self-center align-items-center">
+            <div class="row p-0 m-0 justify-content-center align-content-center align-self-center align-items-center">
+                <p class=" texto-sobre m-0 p-0 fw-bold" id="projetos"> Me chamo Leonardo Santos Custódio, nasci em
+                    abril de
+                    1992, sou natural de Imbituba, Santa Catarina. Atualmente estou
+                    finalizando o curso Técnico em Desenvolvimento de Sistemas no SENAI de Criciúma, com formação
+                    para
+                    12/2023. Almejo em
+                    sequência iniciar uma faculdade de Engenharia de Software. Sei que tenho
+                    muito a agregar para área de tecnologia pos sou fascinado por sistemas e por tudo de amplo
+                    e inovador que podem transformar a nossa realidade.
+                </p>
             </div>
         </div>
     </section>
+    <br>
     <!-- PROJETOS-->
-    <div class="pt-3 corPrimaria mt-4 mb-4" id="projetos">
-        <h3 class="text-center">Projetos</h3>
+    <div class="corPrimaria">
+        <h3 class="text-center p-2">Projetos</h3>
         <!-- PROJETOS CARD -->
-        <div class="container text-black">
-            <div class="row">
-                <div class="col">
-                    <div class="card mb-4 box-shadow rounded-3">
-                        <img class="card-img-top w-100 d-block" alt="img projct[225px]" src="/src/project1.jpg"
+        <div class="container p-0 border-0">
+            <div class="row m-0 p-0 border-0">
+                <div class="col m-0 p-0 border-0">
+                    <div class="card mb-4 border-0 bg-transparent">
+                        <img class="card-img-top d-block border-0 bg-transparent" alt="project" src="/src/project1.jpg"
                             style="height: 225px">
-                        <div class="card-body">
-                            <p class="card-text">Esse é um projeto que eu desenvolvi usando as tecnologias:
+                        <div class="card-body bg-black m-0 border-0">
+
+                            <p class="card-text text-center fs-5">Pokédex
+                            </p>
+                            <p class="card-text fs-6 fw-light">Tecnologias utilizadas :
                             </p>
                             <ul>
-                                <li>Html</li>
-                                <li>Javascript</li>
-                                <li>Css</li>
+                                <li class="fs-6 fw-light">Html</li>
+                                <li class="fs-6 fw-light">Javascript</li>
+                                <li class="fs-6 fw-light">Css</li>
                             </ul>
                             <div class="d-flex justify-content-center align-items-center">
                                 <div class="btn-group-sm">
-                                    <button type="button" class="btn btn-sm btn-success">Ver Projeto</button>
-                                    <button type="button" class="btn btn-sm btn-primary">Ver Código</button>
+                                    <button type="button" class="btn-contato btn-dark btn fw-bold">Ver Projeto</button>
+                                    <button type="button" class="btn-contato btn-dark btn fw-bold">Ver Código</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card mb-4 box-shadow rounded-3">
-                        <img class="card-img-top w-100 d-block" alt="img projct[225px]" src="/src/project1.jpg"
-                            style="height: 225px">
-                        <div class="card-body">
-                            <p class="card-text">Esse é um projeto que eu desenvolvi usando as tecnologias:
-                            </p>
-                            <ul>
-                                <li>Html</li>
-                                <li>Javascript</li>
-                                <li>Css</li>
-                            </ul>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <div class="btn-group-sm">
-                                    <button type="button" class="btn btn-sm btn-success">Ver Projeto</button>
-                                    <button type="button" class="btn btn-sm btn-primary">Ver Código</button>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br>
     <!-- TECHS -->
-    <aside
-        class="techaside text-center corPrimaria p-3 justify-content-center align-content-center text-center align-self-center align-items-center">
-        <h3 id="tech"
-            class="techaside ps-1 text-center p-2 justify-content-center align-content-center text-center align-self-center align-items-center">
-            Tecnologias</h3>
+    <aside class="corPrimaria text-center p-2">
+        <h3 id="tech" class="p-2">Tecnologias</h3>
         <div
-            class="techaside me-1 container-fluid justify-content-center align-content-center text-center align-self-center align-items-center">
+            class="container-fluid text-center justify-content-center align-content-center text-center align-self-center align-items-center">
             <div
-                class="techaside me-1 row justify-content-center align-content-center text-center align-self-center align-items-center">
-                <div
-                    class="techaside me-1 col justify-content-center align-content-center text-center align-self-center align-items-center">
+                class="row fs-1 justify-content-center align-content-center text-center align-self-center align-items-center">
+                <div class="col border-0 b-0 p-1 ">
                     <img class="techaside tech-card rounded-circle p-0 w-auto m-0 justify-content-center align-content-center text-center align-self-center align-items-center"
                         src="./src/html.png" alt="HTML5" title="HTML5" rel="noopener">
                 </div>
-                <div
-                    class="techaside me-1 col justify-content-center align-content-center text-center align-self-center align-items-center">
+                <div class="col border-0 b-0 p-1 ">
                     <img class="techaside  tech-card rounded-circle p-0 w-auto m-0 justify-content-center align-content-center text-center align-self-center align-items-center"
                         src="./src/css3.png" alt="CSS3" title="CSS3" rel="noopener">
                 </div>
-                <div
-                    class="techaside me-1 col justify-content-center align-content-center text-center align-self-center align-items-center">
+                <div class="col border-0 b-0 p-1 ">
                     <img class="techaside  tech-card rounded-circle p-0 w-auto m-0 justify-content-center align-content-center text-center align-self-center align-items-center"
                         src="./src/js.png" alt="JavaScript" title="JavaScript" rel="noopener">
                 </div>
-                <div
-                    class="techaside me-1 col justify-content-center align-content-center text-center align-self-center align-items-center">
+                <div class="col border-0 b-0 p-1 ">
                     <img class="techaside  tech-card rounded-circle p-0 w-auto m-0 justify-content-center align-content-center text-center align-self-center align-items-center"
                         src="./src/react.png" alt="React" title="React" rel="noopener">
                 </div>
-                <div
-                    class="techaside me-1 col justify-content-center align-content-center text-center align-self-center align-items-center">
+                <div class="col border-0 b-0 p-1 ">
                     <img class="techaside bg-white tech-card rounded-circle p-0 w-auto m-0 justify-content-center align-content-center text-center align-self-center align-items-center"
                         src="./src/mysql.png" alt="MySQL" title="MySQL" rel="noopener">
                 </div>
@@ -294,10 +272,10 @@
     </aside>
     <br>
     <!-- CONTATO -->
-    <section Id="contato" class="corPrimaria pt-4 mb-5 pb-3 text-center">
-        <h3 class="text-center">Contato</h3>
+    <section class="corPrimaria p-2">
+        <h3 class="text-center p-2 " Id="contato">Contato</h3>
         <aside
-            class="container-fluid text-center mb-1 pb-4 justify-content-center align-content-center text-center align-self-center align-items-center">
+            class="container-fluid text-center justify-content-center align-content-center text-center align-self-center align-items-center">
             <div
                 class="row fs-1 justify-content-center align-content-center text-center align-self-center align-items-center">
                 <div class="col border-0 b-0 p-0 ">
@@ -310,7 +288,7 @@
                 <div class="col border-0 b-0 p-0 ">
                     <a href="https://www.linkedin.com/in/leocustodio1992/" target="_blank" title="Linkedin"
                         rel="noopener"><i
-                            class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-linkedin text-white"></i></a>
+                            class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-linkedin"></i></a>
                     <h6
                         class="aside-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
                         Linkedin</h6>
@@ -318,7 +296,7 @@
                 <div class="col border-0 b-0 p-0 ">
                     <a href="https://www.instagram.com/leocustodio1/" target="_blank" title="Instagram"
                         rel="noopener"><i
-                            class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-instagram text-white"></i></a>
+                            class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-instagram"></i></a>
                     <h6
                         class="aside-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
                         Insta</h6>
@@ -327,7 +305,7 @@
                     <a href="https://www.facebook.com/Leonardo.lSantosl" target="_blank" title="Facebook"
                         rel="noopener">
                         <i
-                            class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-facebook text-white"></i></a>
+                            class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-facebook"></i></a>
                     <h6
                         class="aside-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
                         Face</h6>
@@ -335,7 +313,7 @@
                 <div class="col border-0 b-0 p-0 ">
                     <a href="./src/Leonardo Currículo.pdf" target="_blank" download title="Currículo" rel="noopener">
                         <i
-                            class="justify-content-center align-content-center text-center align-self-center align-items-center fa-solid fa-file-pdf text-white"></i></a>
+                            class="justify-content-center align-content-center text-center align-self-center align-items-center fa-solid fa-file-pdf"></i></a>
                     <h6
                         class="aside-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
                         Currículo</h6>
@@ -344,7 +322,7 @@
                     <a href="https://wa.me/5548999971941?text=Ol%C3%A1+Leonardo+%21" target="_blank" target="_blank"
                         title="Whattsapp" rel="noopener">
                         <i
-                            class="justify-content-center align-content-center text-center align-self-center align-items-center fa-brands fa-whatsapp text-white"></i></a>
+                            class="justify-content-center align-content-center text-center align-self-center align-items-center fa-brands fa-whatsapp"></i></a>
                     <h6
                         class="aside-menu me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
                         Whatts</h6>
@@ -352,10 +330,11 @@
             </div>
         </aside>
     </section>
+    <br>
     <!-- FOOTER -->
-    <footer class="fixed-bottom text-center bg-dark fs-1 p-0 m-0">
+    <footer class="text-center p-0 m-0">
         <div>
-            <h6 class="navbar-text fs-6 fw-bold p-1 m-0"><span> &copy Todos os
+            <h6 class="navbar-text p-2 m-0"><span> &copy Todos os
                     direitos reservados</span></h6>
         </div>
     </footer>

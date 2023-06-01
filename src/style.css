@@ -1,5 +1,5 @@
 * {
-    font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Exo", "Arial", "Calibri", sans-serif;
     font-weight: 900;
     text-shadow: 1px 1px 0px black, 1px 1px 0px gray;
 }
@@ -11,49 +11,51 @@ html {
 }
 
 body {
-    background-color: rgb(199, 138, 255);
+    background-color: #00a991;
 }
 
 .corPrimaria {
-    background-color: rgb(65, 64, 64);
+    background-color: #182557;
     border-radius: 35px;
     margin-left: 2%;
     margin-right: 2%;
-    border: 3px solid rgb(199, 138, 255);
+
 }
 
 .corPrimaria:hover {
-    box-shadow: 0px 0px 50px rgb(255, 115, 65);
+    box-shadow: 0px 0px 15px rgb(210, 1, 252);
+
+}
+
+h3,
+.ocultar,
+.offcanvas-title,
+.nav-texto {
+    color: #04d6b9;
+    font-weight: bold;
+}
+
+
+/* NAVBAR --------------------------------------*/
+
+.navbar {
+    background-color: #182557;
     transition: 1s ease-in-out;
 }
 
-h3, .ocultar{
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    text-shadow: 1px 1px 1px rgb(0, 0, 0);
-}
-
-/* NAVBAR --------------------------------------*/
-.navbar {
-    border-bottom: 1px solid orangered;
-    color: orangered;
+.navbar:hover {
+    transition: 1s ease-in-out;
+    box-shadow: 0px 0px 15px rgb(210, 1, 252);
 }
 
 #offcanvasDarkNavbar {
     max-width: 70%;
     min-width: 45%;
-    border-left: 1px solid orangered;
+
 }
 
 .offcanvas-title {
-    color: rgb(250, 161, 129);
-    font-weight: bold;
     margin-left: 10%;
-}
-
-.nav-texto {
-    color: rgb(250, 161, 129);
-    font-weight: bold;
 }
 
 .nav-texto2,
@@ -61,6 +63,22 @@ h3, .ocultar{
 .navbar-text {
     color: rgb(199, 138, 255);
     font-weight: bold;
+    font-family: "Exo", "Arial", "Calibri", sans-serif;
+    font-weight: 900;
+    text-shadow: 1px 1px 0px black, 1px 1px 0px gray;
+}
+
+.nav-texto:hover,
+.navbar-text:hover,
+.offcanvas-title:hover, h3:hover{
+    transition: 1s ease-in-out;
+    text-shadow: 1px 1px 30px rgb(199, 138, 255);
+}
+
+.nav-texto2:hover,
+.nav-texto3:hover {
+    transition: 1s ease-in-out;
+    text-shadow: 1px 1px 30px #04d6b9;
 }
 
 .redes-sociais-menu {
@@ -77,27 +95,58 @@ h3, .ocultar{
 }
 
 .botao-menu {
-    object-position: center;
-    align-items: center;
-    align-self: center;
-    align-content: center;
-    justify-self: center;
-    justify-content: center;
-    justify-items: center;
-    text-align: center;
-    margin: 0;
-    color: rgb(250, 161, 129);
+    color: white;
     font-weight: bold;
 }
 
 .borda-menu {
-    box-shadow: 1px 1px 1px 1px rgb(250, 161, 129), -1px -1px 1px 1px rgb(250, 161, 129);
+    box-shadow: 1px 1px 1px 1px rgb(199, 138, 255), -1px -1px 1px 1px #04d6b9;
 }
+
+.borda-menu:hover  {
+    background-color: black;
+    transition: 1s ease-in-out;
+    box-shadow: -1px -1px 1px 1px rgb(199, 138, 255), 1px 1px 1px 1px #04d6b9;
+}
+
+.botao-menu:hover {
+    color: #04d6b9;
+    font-size: large;
+    transition: 1s ease-in-out;
+}
+
+.offcanvas {
+    background-color: #182557;
+    border: 0;
+}
+
+.offcanvas:hover {
+    transition: 1s ease-in-out;
+    box-shadow: 0px 0px 15px rgb(210, 1, 252);
+}
+
+.btn-close {
+    background-color: #04d6b9;
+
+}
+
+.btn-close:hover {
+    transition: 1s ease-in-out;
+    box-shadow: 0px 0px 15px rgb(210, 1, 252);
+}
+
 
 /* FOTO PERFIL --------------------------------*/
 .foto-perfil {
     max-height: 150px;
     border-radius: 50%;
+    border: 6px #00a991 solid;
+}
+
+.foto-perfil:hover {
+    transition: 1.2s ease-in-out;
+    border: 0px #00a991 solid;
+    box-shadow: 0px 0px 15px rgb(210, 1, 252);
 }
 
 .local-foto {
@@ -111,8 +160,21 @@ h3, .ocultar{
     text-align: center;
 }
 
+.btn-contato{
+        box-shadow: 1px 1px 1px 1px rgb(199, 138, 255), -1px -1px 1px 1px #04d6b9;
+        background-color: #182557;
+}
+.btn-contato:hover{
+    color: #04d6b9;
+    font-size: large;
+    transition: 1s ease-in-out;
+    box-shadow: -1px -1px 1px 1px rgb(199, 138, 255), 1px 1px 1px 1px #04d6b9;
+}
+
+
+
 /* SOBRE MIN ---------------------------------*/
-.texto-sobre-mim {
+.texto-sobre {
     text-indent: 5%;
     text-align: justify;
 }
@@ -127,17 +189,64 @@ h3, .ocultar{
 
 /* TECH --------------------------------------*/
 .tech-card {
-    border: 1px solid rgb(199, 138, 255);
+    border: 5px solid rgb(199, 138, 255);
 }
 
 .tech-card:hover {
     box-shadow: 0px 0px 25px rgb(199, 138, 255);
-    transition: 1s ease-in-out;
+    border: 0px;
+    transition: 0.5s ease-in-out;
     cursor: pointer;
 }
 
 /* CONTATO -----------------------------------*/
+
+/* ICONS */
+.fa-facebook,
+.fa-file-pdf,
+.fa-github,
+.fa-instagram,
+.fa-linkedin,
+.fa-whatsapp {
+    color: white;
+}
+
+.fa-whatsapp:hover {
+    transition: 1s ease-in-out;
+    color: rgb(0, 202, 0);
+}
+
+.fa-file-pdf:hover {
+    transition: 1s ease-in-out;
+    color: rgb(255, 109, 109);
+}
+
+.fa-facebook:hover {
+    transition: 1s ease-in-out;
+    color: rgb(68, 68, 250);
+}
+
+.fa-instagram:hover {
+    transition: 1s ease-in-out;
+    color: #da6eb7;
+}
+
+.fa-linkedin:hover {
+    transition: 1s ease-in-out;
+    color: rgb(68, 131, 250);
+}
+
+.fa-github:hover {
+    transition: 1s ease-in-out;
+    filter: invert(35%);
+}
+
 /* FOOTER ------------------------------------*/
 footer {
-    border-top: 1px solid orangered;
+    background-color: #182557;
+}
+
+footer:hover {
+    transition: 1s ease-in-out;
+    box-shadow: 0px 0px 15px rgb(210, 1, 252);
 }

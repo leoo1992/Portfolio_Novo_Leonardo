@@ -41,11 +41,12 @@ h3,
 .navbar {
     background-color: #182557;
     transition: 1s ease-in-out;
+    box-shadow: 0px 0px 15px rgb(210, 1, 252);
 }
 
 .navbar:hover {
-    transition: 1s ease-in-out;
-    box-shadow: 0px 0px 15px rgb(210, 1, 252);
+
+
 }
 
 #offcanvasDarkNavbar {
@@ -134,7 +135,9 @@ h3,
     transition: 1s ease-in-out;
     box-shadow: 0px 0px 15px rgb(210, 1, 252);
 }
-
+.contato-title{
+    cursor: pointer;
+}
 
 /* FOTO PERFIL --------------------------------*/
 .foto-perfil {

@@ -108,6 +108,9 @@
     .coluna-centro-foto {
         min-width: 85%;
     }
+    .aside-modal{
+        font-size: small;
+    }
 }
 
 @media (max-width:400px) {
@@ -125,6 +128,10 @@
     .aside-menu-canvas {
         font-size: 8px;
         font-weight: 100;
+    }
+
+    .aside-modal{
+        font-size: 40%;
     }
 }
 

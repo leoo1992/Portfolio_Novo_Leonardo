@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" href="#contato">
+                    <a class="nav-link text-white text-decoration-none fs-6 fw-bold" onclick="modalActive()">
                         <h6 class="nav-texto">Contato</h6>
                     </a>
                 </li>
@@ -104,8 +104,8 @@
                 <aside
                     class="container-contato-navbar mb-4 pb-0 container-fluid text-center justify-content-center align-content-center text-center align-self-center align-items-center">
 
-                    <a href="#contato" class="nav-link">
-                        <h1 class="offcanvas-title ">Contato :</h1>
+                    <a onclick="modalActive()" class="nav-link">
+                        <h1 class="offcanvas-title contato-title">Contato :</h1>
                     </a>
                     <div
                         class="row fs-1 justify-content-center align-content-center text-center align-self-center align-items-center">
@@ -165,6 +165,7 @@
         </div>
     </nav>
     <br id="home">
+    <br>
     <!-- FOTO -->
     <section class="local-foto text-center pt-5 m-0">
         <div
@@ -177,7 +178,7 @@
                     <h3 class=" m-0 p-0 text-center">Leonardo Santos</h3>
                     <h5>Desenvolvedor Front-end</h5>
                     <span>
-                        <a href="#contato" class="btn-contato btn btn-dark fw-bold" id="sobre-mim">Contato</a>
+                        <a class="btn-contato btn btn-dark fw-bold" id="sobre-mim" onclick="modalActive()">Contato</a>
                     </span>
                 </div>
                 <div class="col coluna m-0 p-0"></div>
@@ -232,7 +233,7 @@
                                     <button type="button" class="btn-contato btn-dark btn fw-bold">Ver Código</button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -331,6 +332,82 @@
         </aside>
     </section>
     <br>
+    <!-- MODAL CONTATO -->
+    <div id="modal-contact" class="modal fade" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content corPrimaria p-2">
+
+                <div class="modal-header">
+                    <h3 class="text-center">Canais de Contato</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+                <div class="modal-body">
+                    <aside class=" container-fluid text-center justify-content-center align-content-center text-center
+                        align-self-center align-items-center">
+                        <div
+                            class="row fs-1 justify-content-center align-content-center text-center align-self-center align-items-center">
+                            <div class="col border-0 b-0 p-0 ">
+                                <a href="https://github.com/leoo1992" target="_blank" title="GitHub" rel="noopener"><i
+                                        class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-github text-white"></i></a>
+                                <h6
+                                    class="aside-modal me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
+                                    GitHub</h6>
+                            </div>
+                            <div class="col border-0 b-0 p-0 ">
+                                <a href="https://www.linkedin.com/in/leocustodio1992/" target="_blank" title="Linkedin"
+                                    rel="noopener"><i
+                                        class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-linkedin"></i></a>
+                                <h6
+                                    class="aside-modal me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
+                                    Linkedin</h6>
+                            </div>
+                            <div class="col border-0 b-0 p-0 ">
+                                <a href="https://www.instagram.com/leocustodio1/" target="_blank" title="Instagram"
+                                    rel="noopener"><i
+                                        class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-instagram"></i></a>
+                                <h6
+                                    class="aside-modal me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
+                                    Insta</h6>
+                            </div>
+                            <div class="col border-0 b-0 p-0 ">
+                                <a href="https://www.facebook.com/Leonardo.lSantosl" target="_blank" title="Facebook"
+                                    rel="noopener">
+                                    <i
+                                        class="me-1 justify-content-center align-content-center text-center align-self-center align-items-center fab fa-facebook"></i></a>
+                                <h6
+                                    class="aside-modal me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
+                                    Face</h6>
+                            </div>
+                            <div class="col border-0 b-0 p-0 ">
+                                <a href="./src/Leonardo Currículo.pdf" target="_blank" download title="Currículo"
+                                    rel="noopener">
+                                    <i
+                                        class="justify-content-center align-content-center text-center align-self-center align-items-center fa-solid fa-file-pdf"></i></a>
+                                <h6
+                                    class="aside-modal me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
+                                    Currículo</h6>
+                            </div>
+                            <div class="col border-0 b-0 p-0 ">
+                                <a href="https://wa.me/5548999971941?text=Ol%C3%A1+Leonardo+%21" target="_blank"
+                                    target="_blank" title="Whattsapp" rel="noopener">
+                                    <i
+                                        class="justify-content-center align-content-center text-center align-self-center align-items-center fa-brands fa-whatsapp"></i></a>
+                                <h6
+                                    class="aside-modal me-1 justify-content-center align-content-center text-center align-self-center align-items-center">
+                                    Whatts</h6>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-contato text-white" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- FOOTER -->
     <footer class="text-center p-0 m-0">
         <div>
@@ -338,6 +415,8 @@
                     direitos reservados</span></h6>
         </div>
     </footer>
+
+
 </body>
 
 </html>

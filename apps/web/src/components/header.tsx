@@ -1,16 +1,13 @@
 'use client';
 
-import {
-  type Locale,
-  type ThemePreference,
-  useExperience,
-} from './experience-provider';
-import { GitHubIcon, LinkedInIcon } from './icons';
+import { type Locale, useExperience } from './experience-provider';
+import { GitHubIcon, LinkedInIcon, MoonIcon, SunIcon } from './icons';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/leocustodio1992/';
 
 export function Header() {
   const { locale, setLocale, theme, setTheme, t } = useExperience();
+  const nextTheme = theme === 'dark' ? 'light' : 'dark';
 
   return (
     <header className="site-header">
@@ -47,31 +44,35 @@ export function Header() {
           </nav>
 
           <div className="experience-controls" aria-label="Interface preferences">
-            <label className="compact-control">
+            <label className="compact-control language-control">
               <span className="sr-only">{t('languageLabel')}</span>
               <select
                 aria-label={t('languageLabel')}
                 value={locale}
                 onChange={(event) => setLocale(event.target.value as Locale)}
               >
-                <option value="pt">PT</option>
-                <option value="en">EN</option>
-                <option value="es">ES</option>
+                <option value="pt">🇧🇷 PT</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="es">🇪🇸 ES</option>
               </select>
             </label>
 
-            <label className="compact-control theme-control">
-              <span className="sr-only">{t('themeLabel')}</span>
-              <select
-                aria-label={t('themeLabel')}
-                value={theme}
-                onChange={(event) => setTheme(event.target.value as ThemePreference)}
-              >
-                <option value="system">{t('themeSystem')}</option>
-                <option value="light">{t('themeLight')}</option>
-                <option value="dark">{t('themeDark')}</option>
-              </select>
-            </label>
+            <button
+              className="theme-toggle"
+              type="button"
+              data-theme={theme}
+              onClick={() => setTheme(nextTheme)}
+              aria-label={`${t('themeLabel')}: ${nextTheme === 'dark' ? t('themeDark') : t('themeLight')}`}
+              aria-pressed={theme === 'dark'}
+            >
+              <span className="theme-toggle-icon theme-toggle-sun" aria-hidden="true">
+                <SunIcon />
+              </span>
+              <span className="theme-toggle-icon theme-toggle-moon" aria-hidden="true">
+                <MoonIcon />
+              </span>
+              <span className="theme-toggle-thumb" aria-hidden="true" />
+            </button>
           </div>
         </div>
       </div>

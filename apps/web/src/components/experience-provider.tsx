@@ -11,7 +11,7 @@ import {
 } from 'react';
 
 export type Locale = 'pt' | 'en' | 'es';
-export type ThemePreference = 'system' | 'light' | 'dark';
+export type ThemePreference = 'light' | 'dark';
 
 const localeTags: Record<Locale, string> = {
   pt: 'pt-BR',
@@ -197,12 +197,16 @@ const ExperienceContext = createContext<ExperienceValue | null>(null);
 export function ExperienceProvider({ children }: { children: ReactNode }) {
   const subscribe = useCallback((callback: () => void) => {
     const handleStorage = () => callback();
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+
     window.addEventListener('storage', handleStorage);
     window.addEventListener('portfolio-preference-change', handleStorage);
+    media.addEventListener('change', handleStorage);
 
     return () => {
       window.removeEventListener('storage', handleStorage);
       window.removeEventListener('portfolio-preference-change', handleStorage);
+      media.removeEventListener('change', handleStorage);
     };
   }, []);
 
@@ -219,9 +223,10 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
     subscribe,
     () => {
       const saved = window.localStorage.getItem('portfolio-theme');
-      return saved === 'system' || saved === 'light' || saved === 'dark' ? saved : 'system';
+      if (saved === 'light' || saved === 'dark') return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     },
-    () => 'system' as ThemePreference,
+    () => 'light' as ThemePreference,
   );
 
   const setLocale = useCallback((nextLocale: Locale) => {
@@ -239,18 +244,8 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
   }, [locale]);
 
   useEffect(() => {
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-
-    const applyTheme = () => {
-      const resolved = theme === 'system' ? (media.matches ? 'dark' : 'light') : theme;
-      document.documentElement.dataset.theme = resolved;
-      document.documentElement.style.colorScheme = resolved;
-    };
-
-    applyTheme();
-    if (theme === 'system') media.addEventListener('change', applyTheme);
-
-    return () => media.removeEventListener('change', applyTheme);
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
   }, [theme]);
 
   const t = useCallback((key: TranslationKey) => dictionary[locale][key], [locale]);

@@ -4,6 +4,8 @@ import { Hero } from '@/components/hero';
 import { ProjectsBrowser } from '@/components/projects-browser';
 import { getPortfolio } from '@/lib/portfolio-api';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const portfolio = await getPortfolio();
 

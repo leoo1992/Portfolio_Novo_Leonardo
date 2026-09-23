@@ -1,20 +1,23 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useDeferredValue, useMemo } from 'react';
 import type { PortfolioProject } from '@/types/github';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   resetFilters,
   setIncludeArchived,
   setLanguage,
+  setOnlyWithDemo,
   setQuery,
   setSort,
   type ProjectSort,
 } from '@/store/projects-slice';
-import { ArrowUpRightIcon, SearchIcon, StarIcon } from './icons';
+import { useExperience } from './experience-provider';
+import { ArrowUpRightIcon, ForkIcon, SearchIcon, StarIcon } from './icons';
+import { TiltSurface } from './tilt-surface';
 
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat('pt-BR', {
+function formatDate(value: string, locale: string) {
+  return new Intl.DateTimeFormat(locale, {
     month: 'short',
     year: 'numeric',
   }).format(new Date(value));
@@ -23,6 +26,8 @@ function formatDate(value: string) {
 export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) {
   const dispatch = useAppDispatch();
   const ui = useAppSelector((state) => state.projectsUi);
+  const deferredQuery = useDeferredValue(ui.query);
+  const { localeTag, t } = useExperience();
 
   const languages = useMemo(
     () => [...new Set(projects.map((project) => project.language).filter(Boolean) as string[])].sort(),
@@ -30,120 +35,174 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
   );
 
   const filtered = useMemo(() => {
-    const query = ui.query.trim().toLocaleLowerCase('pt-BR');
+    const query = deferredQuery.trim().toLocaleLowerCase(localeTag);
+
     return [...projects]
       .filter((project) => ui.includeArchived || !project.archived)
+      .filter((project) => !ui.onlyWithDemo || Boolean(project.homepage))
       .filter((project) => ui.language === 'all' || project.language === ui.language)
       .filter((project) => {
         if (!query) return true;
-        const haystack = [project.name, project.description ?? '', project.language ?? '', ...project.topics]
+
+        const haystack = [
+          project.name,
+          project.description ?? '',
+          project.language ?? '',
+          ...project.topics,
+        ]
           .join(' ')
-          .toLocaleLowerCase('pt-BR');
+          .toLocaleLowerCase(localeTag);
+
         return haystack.includes(query);
       })
       .sort((a, b) => {
         if (ui.sort === 'stars') return b.stars - a.stars;
-        if (ui.sort === 'name') return a.name.localeCompare(b.name, 'pt-BR');
+        if (ui.sort === 'forks') return b.forks - a.forks;
+        if (ui.sort === 'name') return a.name.localeCompare(b.name, localeTag);
         return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
       });
-  }, [projects, ui]);
+  }, [deferredQuery, localeTag, projects, ui]);
 
   return (
     <section id="projetos" className="projects-section" aria-labelledby="projects-title">
       <div className="shell">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">GitHub</p>
-            <h2 id="projects-title">Projetos públicos</h2>
+            <p className="eyebrow">{t('projectsEyebrow')}</p>
+            <h2 id="projects-title">{t('projectsTitle')}</h2>
           </div>
-          <p aria-live="polite">{filtered.length} de {projects.length} projetos</p>
+          <p className="results-count" aria-live="polite">
+            <strong>{filtered.length}</strong>
+            <span>/ {projects.length} {t('results')}</span>
+          </p>
         </div>
 
-        <div className="filters" role="search" aria-label="Filtrar projetos">
-          <label className="search-field">
-            <span className="sr-only">Buscar projeto</span>
-            <SearchIcon />
-            <input
-              type="search"
-              value={ui.query}
-              onChange={(event) => dispatch(setQuery(event.target.value))}
-              placeholder="Buscar por nome, tecnologia ou tema"
-              autoComplete="off"
-            />
-          </label>
+        <div className="filters-panel">
+          <div className="filters" role="search" aria-label={t('filtersLabel')}>
+            <label className="search-field">
+              <span className="sr-only">{t('searchLabel')}</span>
+              <SearchIcon />
+              <input
+                type="search"
+                value={ui.query}
+                onChange={(event) => dispatch(setQuery(event.target.value))}
+                placeholder={t('searchPlaceholder')}
+                autoComplete="off"
+              />
+            </label>
 
-          <label>
-            <span className="sr-only">Filtrar por linguagem</span>
-            <select value={ui.language} onChange={(event) => dispatch(setLanguage(event.target.value))}>
-              <option value="all">Todas as linguagens</option>
-              {languages.map((language) => <option key={language}>{language}</option>)}
-            </select>
-          </label>
+            <label>
+              <span className="sr-only">{t('languageFilter')}</span>
+              <select
+                aria-label={t('languageFilter')}
+                value={ui.language}
+                onChange={(event) => dispatch(setLanguage(event.target.value))}
+              >
+                <option value="all">{t('allLanguages')}</option>
+                {languages.map((language) => (
+                  <option key={language}>{language}</option>
+                ))}
+              </select>
+            </label>
 
-          <label>
-            <span className="sr-only">Ordenar projetos</span>
-            <select
-              value={ui.sort}
-              onChange={(event) => dispatch(setSort(event.target.value as ProjectSort))}
-            >
-              <option value="updated">Atualizados recentemente</option>
-              <option value="stars">Mais estrelas</option>
-              <option value="name">Nome A–Z</option>
-            </select>
-          </label>
+            <label>
+              <span className="sr-only">{t('sortLabel')}</span>
+              <select
+                aria-label={t('sortLabel')}
+                value={ui.sort}
+                onChange={(event) => dispatch(setSort(event.target.value as ProjectSort))}
+              >
+                <option value="updated">{t('sortUpdated')}</option>
+                <option value="stars">{t('sortStars')}</option>
+                <option value="forks">{t('sortForks')}</option>
+                <option value="name">{t('sortName')}</option>
+              </select>
+            </label>
+          </div>
 
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              checked={ui.includeArchived}
-              onChange={(event) => dispatch(setIncludeArchived(event.target.checked))}
-            />
-            Incluir arquivados
-          </label>
+          <div className="filter-toggles">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={ui.includeArchived}
+                onChange={(event) => dispatch(setIncludeArchived(event.target.checked))}
+              />
+              {t('includeArchived')}
+            </label>
+
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={ui.onlyWithDemo}
+                onChange={(event) => dispatch(setOnlyWithDemo(event.target.checked))}
+              />
+              {t('onlyDemo')}
+            </label>
+          </div>
         </div>
 
         {filtered.length === 0 ? (
           <div className="empty-state" role="status">
-            <p>Nenhum projeto corresponde aos filtros atuais.</p>
+            <p>{t('emptyTitle')}</p>
             <button className="text-button" type="button" onClick={() => dispatch(resetFilters())}>
-              Limpar filtros
+              {t('clearFilters')}
             </button>
           </div>
         ) : (
           <div className="projects-grid">
             {filtered.map((project) => (
-              <article className="project-card" key={project.id}>
-                <div className="project-card-topline">
-                  <span className="project-language">{project.language ?? 'Projeto'}</span>
-                  <span className="project-meta">{formatDate(project.updatedAt)}</span>
-                </div>
-                <h3>{project.name}</h3>
-                <p className="project-description">
-                  {project.description ?? 'Projeto disponível para consulta no GitHub.'}
-                </p>
-
-                {project.topics.length > 0 && (
-                  <ul className="topics" aria-label="Tecnologias e tópicos">
-                    {project.topics.slice(0, 4).map((topic) => <li key={topic}>{topic}</li>)}
-                  </ul>
-                )}
-
-                <div className="project-footer">
-                  <span className="stars" aria-label={`${project.stars} estrelas`}>
-                    <StarIcon /> {project.stars}
-                  </span>
-                  <div className="project-links">
-                    {project.homepage && (
-                      <a href={project.homepage} target="_blank" rel="noreferrer">
-                        Demo <ArrowUpRightIcon />
-                      </a>
-                    )}
-                    <a href={project.url} target="_blank" rel="noreferrer">
-                      Código <ArrowUpRightIcon />
-                    </a>
+              <TiltSurface className="project-tilt" key={project.id}>
+                <article className="project-card">
+                  <div className="project-card-topline">
+                    <div className="project-badges">
+                      <span className="project-language">
+                        {project.language ?? t('projectGeneric')}
+                      </span>
+                      {project.archived ? (
+                        <span className="archive-badge">{t('archived')}</span>
+                      ) : null}
+                    </div>
+                    <span className="project-meta">
+                      {formatDate(project.updatedAt, localeTag)}
+                    </span>
                   </div>
-                </div>
-              </article>
+
+                  <h3>{project.name}</h3>
+                  <p className="project-description">
+                    {project.description ?? t('projectFallback')}
+                  </p>
+
+                  {project.topics.length > 0 ? (
+                    <ul className="topics" aria-label={t('topicsLabel')}>
+                      {project.topics.slice(0, 5).map((topic) => (
+                        <li key={topic}>{topic}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+
+                  <div className="project-footer">
+                    <div className="project-stats">
+                      <span className="stars" aria-label={String(project.stars) + ' ' + t('stars')}>
+                        <StarIcon /> {project.stars}
+                      </span>
+                      <span className="stars" aria-label={String(project.forks) + ' ' + t('forks')}>
+                        <ForkIcon /> {project.forks}
+                      </span>
+                    </div>
+
+                    <div className="project-links">
+                      {project.homepage ? (
+                        <a href={project.homepage} target="_blank" rel="noreferrer">
+                          {t('demo')} <ArrowUpRightIcon />
+                        </a>
+                      ) : null}
+                      <a href={project.url} target="_blank" rel="noreferrer">
+                        {t('code')} <ArrowUpRightIcon />
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              </TiltSurface>
             ))}
           </div>
         )}

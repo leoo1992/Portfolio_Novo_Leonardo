@@ -15,6 +15,17 @@ export function GitHubIcon(props: IconProps) {
   );
 }
 
+export function LinkedInIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M5.35 3.5A1.85 1.85 0 1 1 5.34 7.2a1.85 1.85 0 0 1 .01-3.7ZM3.75 8.65h3.2V20h-3.2V8.65Zm5.25 0h3.07v1.55h.04c.43-.81 1.47-1.66 3.03-1.66 3.24 0 3.84 2.13 3.84 4.9V20h-3.2v-5.82c0-1.39-.03-3.18-1.94-3.18-1.94 0-2.24 1.52-2.24 3.08V20H9V8.65Z"
+      />
+    </svg>
+  );
+}
+
 export function ArrowUpRightIcon(props: IconProps) {
   return (
     <svg {...base} {...props} aria-hidden="true" stroke="currentColor" strokeWidth="1.8">
@@ -27,6 +38,17 @@ export function StarIcon(props: IconProps) {
   return (
     <svg {...base} {...props} aria-hidden="true" stroke="currentColor" strokeWidth="1.7">
       <path d="m12 3 2.75 5.57 6.15.9-4.45 4.33 1.05 6.12L12 17.03 6.5 19.92l1.05-6.12L3.1 9.47l6.15-.9L12 3Z" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function ForkIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="6" cy="5" r="2" />
+      <circle cx="18" cy="5" r="2" />
+      <circle cx="12" cy="19" r="2" />
+      <path d="M6 7v2.5A2.5 2.5 0 0 0 8.5 12H12m6-5v2.5a2.5 2.5 0 0 1-2.5 2.5H12m0 0v5" strokeLinecap="round" />
     </svg>
   );
 }

@@ -11,7 +11,7 @@ const manrope = Manrope({ subsets: ['latin'], variable: '--font-display', displa
 
 const siteUrl = getSiteUrl();
 
-const experienceBootstrap = String.raw\`
+const experienceBootstrap = `
 (function () {
   try {
     var savedTheme = localStorage.getItem('portfolio-theme') || 'system';
@@ -28,7 +28,7 @@ const experienceBootstrap = String.raw\`
     else document.documentElement.lang = 'pt-BR';
   } catch (_) {}
 })();
-\`;
+`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -59,7 +59,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={\`\${inter.variable} \${manrope.variable}\`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${inter.variable} ${manrope.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: experienceBootstrap }} />
       </head>

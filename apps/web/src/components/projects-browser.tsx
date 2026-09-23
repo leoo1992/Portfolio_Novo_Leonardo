@@ -129,7 +129,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
                 )}
 
                 <div className="project-footer">
-                  <span className="stars" aria-label={\`\${project.stars} estrelas\`}>
+                  <span className="stars" aria-label={`${project.stars} estrelas`}>
                     <StarIcon /> {project.stars}
                   </span>
                   <div className="project-links">

@@ -63,7 +63,8 @@ export function Header() {
               data-theme={theme}
               onClick={() => setTheme(nextTheme)}
               aria-label={`${t('themeLabel')}: ${nextTheme === 'dark' ? t('themeDark') : t('themeLight')}`}
-              aria-pressed={theme === 'dark'}
+              role="switch"
+              aria-checked={theme === 'dark'}
             >
               <span className="theme-toggle-icon theme-toggle-sun" aria-hidden="true">
                 <SunIcon />

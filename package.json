@@ -1,0 +1,22 @@
+{
+  "name": "leonardo-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "packageManager": "npm@10.9.2",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "concurrently -n web,api -c auto \"npm run dev -w @portfolio/web\" \"npm run dev -w @portfolio/api\"",
+    "build": "npm run build -w @portfolio/api && npm run build -w @portfolio/web",
+    "lint": "npm run lint -w @portfolio/api && npm run lint -w @portfolio/web",
+    "typecheck": "npm run typecheck -w @portfolio/api && npm run typecheck -w @portfolio/web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prettier": "^3.6.2"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 
-const apiUrl = process.env.API_INTERNAL_URL ?? 'http://localhost:4000';
+const apiUrl = process.env.API_INTERNAL_URL?.trim();
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
@@ -14,10 +14,12 @@ const nextConfig: NextConfig = {
     ],
   },
   async rewrites() {
+    if (!apiUrl) return [];
+
     return [
       {
         source: '/api/backend/:path*',
-        destination: `${apiUrl}/api/:path*`,
+        destination: `${apiUrl.replace(/\/$/, '')}/api/:path*`,
       },
     ];
   },

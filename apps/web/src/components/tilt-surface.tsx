@@ -18,10 +18,10 @@ export function TiltSurface({
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
 
-    ref.current.style.setProperty('--tilt-x', \`\${(-y * 10).toFixed(2)}deg\`);
-    ref.current.style.setProperty('--tilt-y', \`\${(x * 12).toFixed(2)}deg\`);
-    ref.current.style.setProperty('--glow-x', \`\${((x + 0.5) * 100).toFixed(1)}%\`);
-    ref.current.style.setProperty('--glow-y', \`\${((y + 0.5) * 100).toFixed(1)}%\`);
+    ref.current.style.setProperty('--tilt-x', `${(-y * 10).toFixed(2)}deg`);
+    ref.current.style.setProperty('--tilt-y', `${(x * 12).toFixed(2)}deg`);
+    ref.current.style.setProperty('--glow-x', `${((x + 0.5) * 100).toFixed(1)}%`);
+    ref.current.style.setProperty('--glow-y', `${((y + 0.5) * 100).toFixed(1)}%`);
   };
 
   const reset = () => {
@@ -34,7 +34,7 @@ export function TiltSurface({
   return (
     <div
       ref={ref}
-      className={\`tilt-surface \${className}\`.trim()}
+      className={`tilt-surface ${className}`.trim()}
       onPointerMove={handlePointerMove}
       onPointerLeave={reset}
       onPointerCancel={reset}

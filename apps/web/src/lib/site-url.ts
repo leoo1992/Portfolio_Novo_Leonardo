@@ -8,7 +8,7 @@ export function getSiteUrl() {
     const candidate =
       configured.startsWith('http://') || configured.startsWith('https://')
         ? configured
-        : \`https://\${configured}\`;
+        : `https://${configured}`;
     const url = new URL(candidate);
 
     if (url.protocol !== 'http:' && url.protocol !== 'https:') return FALLBACK_SITE_URL;

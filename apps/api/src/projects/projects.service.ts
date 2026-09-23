@@ -35,7 +35,7 @@ interface CacheValue {
 
 @Injectable()
 export class ProjectsService {
-  private readonly username = process.env.GITHUB_USERNAME ?? 'leoo1992';
+  private readonly username = 'leoo1992';
   private cache: CacheValue | null = null;
 
   async getPortfolio() {

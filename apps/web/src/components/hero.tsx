@@ -1,49 +1,110 @@
+'use client';
+
 import Image from 'next/image';
 import type { GitHubProfile } from '@/types/github';
-import { ArrowUpRightIcon, GitHubIcon } from './icons';
+import { useExperience } from './experience-provider';
+import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon } from './icons';
+import { TiltSurface } from './tilt-surface';
 
-export function Hero({ profile }: { profile: GitHubProfile }) {
+const LINKEDIN_URL = 'https://www.linkedin.com/in/leocustodio1992/';
+
+interface HeroProps {
+  profile: GitHubProfile;
+  projectCount: number;
+  languageCount: number;
+  starsTotal: number;
+}
+
+export function Hero({ profile, projectCount, languageCount, starsTotal }: HeroProps) {
+  const { t } = useExperience();
+
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section id="top" className="hero" aria-labelledby="hero-title">
       <div className="shell hero-grid">
-        <div>
-          <p className="eyebrow">Desenvolvedor de software</p>
-          <h1 id="hero-title">Produtos digitais com engenharia, clareza e atenção ao detalhe.</h1>
-          <p className="hero-copy">
-            Desenvolvimento full-stack com foco em interfaces robustas, APIs bem estruturadas,
-            performance, acessibilidade e experiência de uso.
-          </p>
+        <div className="hero-content">
+          <div className="signal-line" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+          <p className="eyebrow">{t('heroEyebrow')}</p>
+          <h1 id="hero-title">{t('heroTitle')}</h1>
+          <p className="hero-copy">{t('heroCopy')}</p>
+
           <div className="hero-actions">
-            <a className="button button-primary" href="#projetos">Ver projetos</a>
+            <a className="button button-primary" href="#projetos">
+              {t('projectsCta')} <ArrowUpRightIcon />
+            </a>
             <a
               className="button button-secondary"
               href={profile.profileUrl}
               target="_blank"
               rel="noreferrer"
             >
-              <GitHubIcon /> GitHub <ArrowUpRightIcon />
+              <GitHubIcon /> GitHub
+            </a>
+            <a
+              className="button button-secondary"
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <LinkedInIcon /> LinkedIn
             </a>
           </div>
+
+          <dl className="hero-metrics" aria-label="Portfolio metrics">
+            <div>
+              <dt>{t('repositories')}</dt>
+              <dd>{projectCount}</dd>
+            </div>
+            <div>
+              <dt>{t('technologies')}</dt>
+              <dd>{languageCount}</dd>
+            </div>
+            <div>
+              <dt>{t('stars')}</dt>
+              <dd>{starsTotal}</dd>
+            </div>
+          </dl>
         </div>
 
-        <aside className="profile-card" aria-label="Perfil do GitHub">
-          <Image
-            src={profile.avatarUrl}
-            width={88}
-            height={88}
-            priority
-            alt={`Foto de perfil de ${profile.name}`}
-            className="avatar"
-          />
-          <div>
-            <p className="profile-name">{profile.name}</p>
-            <p className="profile-login">@{profile.login}</p>
-          </div>
-          <dl className="profile-stats">
-            <div><dt>Repositórios</dt><dd>{profile.publicRepos}</dd></div>
-            <div><dt>Seguidores</dt><dd>{profile.followers}</dd></div>
-          </dl>
-        </aside>
+        <TiltSurface className="profile-tilt">
+          <aside className="profile-card" aria-label={t('githubProfile')}>
+            <div className="profile-halo" aria-hidden="true" />
+            <Image
+              src={profile.avatarUrl}
+              width={104}
+              height={104}
+              priority
+              sizes="104px"
+              alt={profile.name}
+              className="avatar"
+            />
+            <div>
+              <p className="profile-name">{profile.name}</p>
+              <p className="profile-login">@{profile.login}</p>
+            </div>
+
+            {profile.location ? (
+              <p className="profile-location">
+                <span>{t('profileLocation')}</span>
+                {profile.location}
+              </p>
+            ) : null}
+
+            <dl className="profile-stats">
+              <div>
+                <dt>{t('repositories')}</dt>
+                <dd>{profile.publicRepos}</dd>
+              </div>
+              <div>
+                <dt>{t('followers')}</dt>
+                <dd>{profile.followers}</dd>
+              </div>
+            </dl>
+          </aside>
+        </TiltSurface>
       </div>
     </section>
   );

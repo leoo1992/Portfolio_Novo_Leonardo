@@ -1,12 +1,18 @@
 'use client';
 
+import { useExperience } from '@/components/experience-provider';
+
 export default function ErrorPage({ reset }: { reset: () => void }) {
+  const { t } = useExperience();
+
   return (
     <main className="shell error-state">
-      <p className="eyebrow">Falha temporária</p>
-      <h1>Não foi possível carregar os projetos.</h1>
-      <p>Tente novamente. Se o problema persistir, o limite da API do GitHub pode ter sido atingido.</p>
-      <button className="button button-primary" type="button" onClick={reset}>Tentar novamente</button>
+      <p className="eyebrow">{t('errorEyebrow')}</p>
+      <h1>{t('errorTitle')}</h1>
+      <p>{t('errorCopy')}</p>
+      <button className="button button-primary" type="button" onClick={reset}>
+        {t('retry')}
+      </button>
     </main>
   );
 }

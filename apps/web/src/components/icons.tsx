@@ -53,6 +53,30 @@ export function ForkIcon(props: IconProps) {
   );
 }
 
+export function SunIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="12" cy="12" r="3.5" />
+      <path
+        d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function MoonIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props} aria-hidden="true" stroke="currentColor" strokeWidth="1.8">
+      <path
+        d="M20.3 15.4A8.3 8.3 0 0 1 8.6 3.7 8.7 8.7 0 1 0 20.3 15.4Z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function SearchIcon(props: IconProps) {
   return (
     <svg {...base} {...props} aria-hidden="true" stroke="currentColor" strokeWidth="1.8">

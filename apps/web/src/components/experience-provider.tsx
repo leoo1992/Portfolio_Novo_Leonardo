@@ -6,7 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from 'react';
 
@@ -195,24 +195,48 @@ interface ExperienceValue {
 const ExperienceContext = createContext<ExperienceValue | null>(null);
 
 export function ExperienceProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = useState<Locale>('pt');
-  const [theme, setTheme] = useState<ThemePreference>('system');
-  const [hydrated, setHydrated] = useState(false);
+  const subscribe = useCallback((callback: () => void) => {
+    const handleStorage = () => callback();
+    window.addEventListener('storage', handleStorage);
+    window.addEventListener('portfolio-preference-change', handleStorage);
 
-  useEffect(() => {
-    const savedLocale = window.localStorage.getItem('portfolio-locale');
-    const savedTheme = window.localStorage.getItem('portfolio-theme');
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('portfolio-preference-change', handleStorage);
+    };
+  }, []);
 
-    if (savedLocale === 'pt' || savedLocale === 'en' || savedLocale === 'es') setLocale(savedLocale);
-    if (savedTheme === 'system' || savedTheme === 'light' || savedTheme === 'dark') setTheme(savedTheme);
+  const locale = useSyncExternalStore(
+    subscribe,
+    () => {
+      const saved = window.localStorage.getItem('portfolio-locale');
+      return saved === 'pt' || saved === 'en' || saved === 'es' ? saved : 'pt';
+    },
+    () => 'pt' as Locale,
+  );
 
-    setHydrated(true);
+  const theme = useSyncExternalStore(
+    subscribe,
+    () => {
+      const saved = window.localStorage.getItem('portfolio-theme');
+      return saved === 'system' || saved === 'light' || saved === 'dark' ? saved : 'system';
+    },
+    () => 'system' as ThemePreference,
+  );
+
+  const setLocale = useCallback((nextLocale: Locale) => {
+    window.localStorage.setItem('portfolio-locale', nextLocale);
+    window.dispatchEvent(new Event('portfolio-preference-change'));
+  }, []);
+
+  const setTheme = useCallback((nextTheme: ThemePreference) => {
+    window.localStorage.setItem('portfolio-theme', nextTheme);
+    window.dispatchEvent(new Event('portfolio-preference-change'));
   }, []);
 
   useEffect(() => {
     document.documentElement.lang = localeTags[locale];
-    if (hydrated) window.localStorage.setItem('portfolio-locale', locale);
-  }, [hydrated, locale]);
+  }, [locale]);
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-color-scheme: dark)');
@@ -225,16 +249,15 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
 
     applyTheme();
     if (theme === 'system') media.addEventListener('change', applyTheme);
-    if (hydrated) window.localStorage.setItem('portfolio-theme', theme);
 
     return () => media.removeEventListener('change', applyTheme);
-  }, [hydrated, theme]);
+  }, [theme]);
 
   const t = useCallback((key: TranslationKey) => dictionary[locale][key], [locale]);
 
   const value = useMemo(
     () => ({ locale, localeTag: localeTags[locale], setLocale, theme, setTheme, t }),
-    [locale, theme, t],
+    [locale, setLocale, setTheme, theme, t],
   );
 
   return <ExperienceContext.Provider value={value}>{children}</ExperienceContext.Provider>;

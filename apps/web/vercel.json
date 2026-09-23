@@ -4,5 +4,9 @@
     "deploymentEnabled": {
       "master": true
     }
+  },
+  "github": {
+    "autoAlias": true,
+    "autoJobCancelation": false
   }
 }

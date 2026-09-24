@@ -1,27 +1,18 @@
 import type { NextConfig } from 'next';
 
-const apiUrl = process.env.API_INTERNAL_URL?.trim();
-
 const nextConfig: NextConfig = {
+  output: 'export',
   poweredByHeader: false,
   reactStrictMode: true,
+  trailingSlash: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'avatars.githubusercontent.com',
       },
     ],
-  },
-  async rewrites() {
-    if (!apiUrl) return [];
-
-    return [
-      {
-        source: '/api/backend/:path*',
-        destination: `${apiUrl.replace(/\/$/, '')}/api/:path*`,
-      },
-    ];
   },
 };
 

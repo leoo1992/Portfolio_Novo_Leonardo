@@ -31,25 +31,6 @@ interface GitHubRepositoryResponse {
 const GITHUB_USERNAME = 'leoo1992';
 
 export async function getPortfolio(): Promise<PortfolioResponse> {
-  const apiUrl = process.env.API_INTERNAL_URL?.trim();
-
-  if (apiUrl) {
-    try {
-      const response = await fetch(`${apiUrl.replace(/\/$/, '')}/api/projects`, {
-        next: { revalidate: 300 },
-        headers: { Accept: 'application/json' },
-      });
-
-      if (response.ok) {
-        return response.json() as Promise<PortfolioResponse>;
-      }
-
-      console.error(`Portfolio API returned ${response.status}. Using GitHub fallback.`);
-    } catch (error) {
-      console.error('Portfolio API unavailable. Using GitHub fallback.', error);
-    }
-  }
-
   return getPortfolioFromGitHub();
 }
 
@@ -61,19 +42,17 @@ async function getPortfolioFromGitHub(): Promise<PortfolioResponse> {
   };
 
   const token = process.env.GITHUB_TOKEN?.trim();
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
+  if (token) headers.Authorization = `Bearer ${token}`;
 
   const [userResponse, repositoriesResponse] = await Promise.all([
     fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
-      next: { revalidate: 300 },
+      cache: 'force-cache',
       headers,
     }),
     fetch(
       `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated&direction=desc`,
       {
-        next: { revalidate: 300 },
+        cache: 'force-cache',
         headers,
       },
     ),
@@ -81,7 +60,7 @@ async function getPortfolioFromGitHub(): Promise<PortfolioResponse> {
 
   if (!userResponse.ok || !repositoriesResponse.ok) {
     throw new Error(
-      `GitHub fallback failed: profile=${userResponse.status}, repositories=${repositoriesResponse.status}`,
+      `GitHub build fetch failed: profile=${userResponse.status}, repositories=${repositoriesResponse.status}`,
     );
   }
 

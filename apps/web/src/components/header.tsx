@@ -1,9 +1,16 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { type Locale, useExperience } from './experience-provider';
 import { GitHubIcon, LinkedInIcon, MoonIcon, SunIcon } from './icons';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/leocustodio1992/';
+
+const languageOptions: Array<{ locale: Locale; code: string; label: string }> = [
+  { locale: 'pt', code: 'PT', label: 'Português' },
+  { locale: 'en', code: 'EN', label: 'English' },
+  { locale: 'es', code: 'ES', label: 'Español' },
+];
 
 function LanguageFlag({ locale }: { locale: Locale }) {
   if (locale === 'pt') {
@@ -41,8 +48,77 @@ function LanguageFlag({ locale }: { locale: Locale }) {
   );
 }
 
+function LanguageSelector() {
+  const { locale, setLocale, t } = useExperience();
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const selected = languageOptions.find((option) => option.locale === locale) ?? languageOptions[0]!;
+
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const chooseLanguage = (nextLocale: Locale) => {
+    setLocale(nextLocale);
+    setOpen(false);
+  };
+
+  return (
+    <div className="language-picker" ref={rootRef}>
+      <button
+        className="language-trigger"
+        type="button"
+        aria-label={t('languageLabel')}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+      >
+        <span className="language-flag"><LanguageFlag locale={selected.locale} /></span>
+        <span className="language-code">{selected.code}</span>
+        <span className="language-chevron" aria-hidden="true">⌄</span>
+      </button>
+
+      {open ? (
+        <div className="language-menu" role="listbox" aria-label={t('languageLabel')}>
+          {languageOptions.map((option) => (
+            <button
+              key={option.locale}
+              className="language-option"
+              type="button"
+              role="option"
+              aria-selected={option.locale === locale}
+              onClick={() => chooseLanguage(option.locale)}
+            >
+              <span className="language-flag"><LanguageFlag locale={option.locale} /></span>
+              <span className="language-option-copy">
+                <strong>{option.code}</strong>
+                <small>{option.label}</small>
+              </span>
+              <span className="language-check" aria-hidden="true">
+                {option.locale === locale ? '✓' : ''}
+              </span>
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export function Header() {
-  const { locale, setLocale, theme, setTheme, t } = useExperience();
+  const { theme, setTheme, t } = useExperience();
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
 
   return (
@@ -59,59 +135,26 @@ export function Header() {
         <div className="header-actions">
           <nav aria-label={t('navLabel')}>
             <a className="nav-link" href="#projetos">{t('navProjects')}</a>
-            <a
-              className="icon-link"
-              href="https://github.com/leoo1992"
-              target="_blank"
-              rel="noreferrer"
-              aria-label={t('navGithub')}
-            >
+            <a className="icon-link" href="https://github.com/leoo1992" target="_blank" rel="noreferrer" aria-label={t('navGithub')}>
               <GitHubIcon />
             </a>
-            <a
-              className="icon-link"
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={t('navLinkedin')}
-            >
+            <a className="icon-link" href={LINKEDIN_URL} target="_blank" rel="noreferrer" aria-label={t('navLinkedin')}>
               <LinkedInIcon />
             </a>
           </nav>
 
           <div className="experience-controls" aria-label="Interface preferences">
-            <label className="language-control" data-locale={locale}>
-              <span className="language-flag">
-                <LanguageFlag locale={locale} />
-              </span>
-              <span className="sr-only">{t('languageLabel')}</span>
-              <select
-                aria-label={t('languageLabel')}
-                value={locale}
-                onChange={(event) => setLocale(event.target.value as Locale)}
-              >
-                <option value="pt">PT</option>
-                <option value="en">EN</option>
-                <option value="es">ES</option>
-              </select>
-            </label>
-
+            <LanguageSelector />
             <button
-              className="theme-toggle"
+              className="theme-switcher"
               type="button"
               data-theme={theme}
               onClick={() => setTheme(nextTheme)}
               aria-label={`${t('themeLabel')}: ${nextTheme === 'dark' ? t('themeDark') : t('themeLight')}`}
-              role="switch"
-              aria-checked={theme === 'dark'}
+              title={nextTheme === 'dark' ? t('themeDark') : t('themeLight')}
             >
-              <span className="theme-toggle-icon theme-toggle-sun" aria-hidden="true">
-                <SunIcon />
-              </span>
-              <span className="theme-toggle-icon theme-toggle-moon" aria-hidden="true">
-                <MoonIcon />
-              </span>
-              <span className="theme-toggle-thumb" aria-hidden="true" />
+              <span className="theme-switcher-icon theme-switcher-sun" aria-hidden="true"><SunIcon /></span>
+              <span className="theme-switcher-icon theme-switcher-moon" aria-hidden="true"><MoonIcon /></span>
             </button>
           </div>
         </div>

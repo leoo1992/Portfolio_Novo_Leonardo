@@ -5,7 +5,7 @@ import { ProjectsBrowser } from '@/components/projects-browser';
 import { getPortfolio } from '@/lib/portfolio-api';
 import { getSiteUrl } from '@/lib/site-url';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/leocustodio1992/';
 

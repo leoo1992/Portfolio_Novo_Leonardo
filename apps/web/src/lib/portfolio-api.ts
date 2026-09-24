@@ -30,6 +30,18 @@ interface GitHubRepositoryResponse {
 
 const GITHUB_USERNAME = 'leoo1992';
 
+const VERIFIED_DEMOS: Record<string, string> = {
+  'leoo1992/biblioteca': 'https://biblioteca-pi.vercel.app',
+  'leoo1992/GuessNumber': 'https://guess-number-leoo1992.vercel.app',
+  'leoo1992/MemoGame-React-Vite-TS': 'https://memo-game-react-vite-ts.vercel.app',
+  'leoo1992/Projeto': 'https://projeto-vert-three.vercel.app',
+  'leoo1992/SvelteTraining': 'https://svelte-training-five.vercel.app',
+  'leoo1992/sistema_ponto': 'https://sistema-ponto-two.vercel.app',
+  'leoo1992/inputSvelte': 'https://input-svelte.vercel.app',
+  'leoo1992/GeradorQRCode': 'https://gerador-qr-code-lovat.vercel.app',
+  'leoo1992/task-list': 'https://task-list-beta-sandy.vercel.app',
+};
+
 export async function getPortfolio(): Promise<PortfolioResponse> {
   return getPortfolioFromGitHub();
 }
@@ -86,7 +98,7 @@ async function getPortfolioFromGitHub(): Promise<PortfolioResponse> {
       fullName: repository.full_name,
       description: repository.description,
       url: repository.html_url,
-      homepage: normalizeHomepage(repository.homepage),
+      homepage: VERIFIED_DEMOS[repository.full_name] ?? null,
       language: repository.language,
       topics: repository.topics ?? [],
       stars: repository.stargazers_count,
@@ -103,13 +115,3 @@ async function getPortfolioFromGitHub(): Promise<PortfolioResponse> {
   };
 }
 
-function normalizeHomepage(value: string | null) {
-  if (!value) return null;
-
-  try {
-    const url = new URL(value.startsWith('http') ? value : `https://${value}`);
-    return ['http:', 'https:'].includes(url.protocol) ? url.toString() : null;
-  } catch {
-    return null;
-  }
-}

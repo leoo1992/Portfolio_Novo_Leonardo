@@ -71,11 +71,13 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
           </p>
         </div>
 
-        <div className="filters-panel">
-          <div className="filters" role="search" aria-label={t('filtersLabel')}>
-            <label className="search-field">
+        <div className="filters-panel filters-panel-compact">
+          <div className="filters project-filters" role="search" aria-label={t('filtersLabel')}>
+            <label className="filter-field search-field project-search">
               <span className="sr-only">{t('searchLabel')}</span>
-              <SearchIcon />
+              <span className="filter-leading-icon" aria-hidden="true">
+                <SearchIcon />
+              </span>
               <input
                 type="search"
                 value={ui.query}
@@ -85,8 +87,13 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
               />
             </label>
 
-            <label>
+            <label className="filter-field project-language-filter">
               <span className="sr-only">{t('languageFilter')}</span>
+              <span className="filter-leading-icon filter-code-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="m9 7-5 5 5 5M15 7l5 5-5 5" />
+                </svg>
+              </span>
               <select
                 aria-label={t('languageFilter')}
                 value={ui.language}
@@ -97,6 +104,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
                   <option key={language}>{language}</option>
                 ))}
               </select>
+              <span className="filter-chevron" aria-hidden="true">⌄</span>
             </label>
           </div>
         </div>

@@ -14,11 +14,6 @@ export function Footer() {
           <p>{t('footerRole')}</p>
         </div>
 
-        <div className="footer-center">
-          <span className="footer-pulse" aria-hidden="true" />
-          <span>{t('footerBuilt')}</span>
-        </div>
-
         <nav className="footer-social" aria-label={t('footerSocial')}>
           <a
             className="icon-link"

@@ -31,6 +31,7 @@ interface GitHubRepositoryResponse {
 const GITHUB_USERNAME = 'leoo1992';
 
 const VERIFIED_DEMOS: Record<string, string> = {
+  'leoo1992/POC-NEXT-DOG-SOCIAL-NETWORK': 'https://dogs-next-final-blue.vercel.app',
   'leoo1992/biblioteca': 'https://biblioteca-pi.vercel.app',
   'leoo1992/GuessNumber': 'https://guess-number-leoo1992.vercel.app',
   'leoo1992/MemoGame-React-Vite-TS': 'https://memo-game-react-vite-ts.vercel.app',

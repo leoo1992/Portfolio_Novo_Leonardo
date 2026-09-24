@@ -122,23 +122,6 @@ async function getPortfolioFromGitHub(): Promise<PortfolioResponse> {
       updatedAt: repository.updated_at,
     }));
 
-  projects.push({
-    id: 2_026_092_401,
-    name: 'BI Analytics Dashboard',
-    fullName: 'leoo1992/Portfolio_Novo_Leonardo',
-    description:
-      'Dashboard comercial interativo com KPIs, filtros multidimensionais, análise temporal, desempenho regional e exportação CSV.',
-    url: 'https://github.com/leoo1992/Portfolio_Novo_Leonardo/tree/master/apps/web/src/app/bi-dashboard',
-    homepage: '/bi-dashboard/',
-    language: 'TypeScript',
-    topics: ['nextjs', 'react', 'typescript', 'business-intelligence', 'dashboard'],
-    stars: 0,
-    forks: 0,
-    isFork: false,
-    archived: false,
-    updatedAt: '2026-09-24T14:00:00.000Z',
-  });
-
   return {
     profile,
     projects,

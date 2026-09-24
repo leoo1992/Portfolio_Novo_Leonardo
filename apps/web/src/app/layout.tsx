@@ -23,10 +23,8 @@ const experienceBootstrap = `
     document.documentElement.dataset.theme = resolvedTheme;
     document.documentElement.style.colorScheme = resolvedTheme;
 
-    var savedLocale = localStorage.getItem('portfolio-locale');
-    if (savedLocale === 'en') document.documentElement.lang = 'en-US';
-    else if (savedLocale === 'es') document.documentElement.lang = 'es-ES';
-    else document.documentElement.lang = 'pt-BR';
+    localStorage.removeItem('portfolio-locale');
+    document.documentElement.lang = 'pt-BR';
   } catch (_) {}
 })();
 `;

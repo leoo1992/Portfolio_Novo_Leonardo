@@ -22,6 +22,7 @@ export interface GitHubProfile {
   bio: string | null;
   location: string | null;
   publicRepos: number;
+  privateRepos: number;
   followers: number;
 }
 

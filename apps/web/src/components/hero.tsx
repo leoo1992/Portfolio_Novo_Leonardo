@@ -95,8 +95,12 @@ export function Hero({ profile, projectCount, languageCount, starsTotal }: HeroP
 
             <dl className="profile-stats">
               <div>
-                <dt>{t('repositories')}</dt>
+                <dt>{t('publicRepositories')}</dt>
                 <dd>{profile.publicRepos}</dd>
+              </div>
+              <div>
+                <dt>{t('privateRepositories')}</dt>
+                <dd>{profile.privateRepos}</dd>
               </div>
               <div>
                 <dt>{t('followers')}</dt>

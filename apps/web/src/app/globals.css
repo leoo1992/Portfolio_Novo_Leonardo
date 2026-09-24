@@ -645,7 +645,7 @@ h1 {
   z-index: 1;
   margin: auto 0 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -1589,8 +1589,8 @@ h1 {
   }
 
   .profile-stats {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
   }
 
   .profile-stats div {
@@ -1703,10 +1703,6 @@ h1 {
 
   h1 {
     font-size: 33px;
-  }
-
-  .profile-stats {
-    grid-template-columns: 1fr;
   }
 
   .project-card-topline {

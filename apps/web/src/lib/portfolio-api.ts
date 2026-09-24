@@ -11,6 +11,12 @@ interface GitHubUserResponse {
   followers: number;
 }
 
+interface GitHubAuthenticatedUserResponse {
+  login: string;
+  owned_private_repos?: number;
+  total_private_repos?: number;
+}
+
 interface GitHubRepositoryResponse {
   id: number;
   name: string;
@@ -29,6 +35,7 @@ interface GitHubRepositoryResponse {
 }
 
 const GITHUB_USERNAME = 'leoo1992';
+const VERIFIED_PRIVATE_REPO_COUNT = 4;
 
 const VERIFIED_DEMOS: Record<string, string> = {
   'leoo1992/POC-NEXT-DOG-SOCIAL-NETWORK': 'https://dogs-next-final-blue.vercel.app',
@@ -57,7 +64,11 @@ async function getPortfolioFromGitHub(): Promise<PortfolioResponse> {
   const token = process.env.GITHUB_TOKEN?.trim();
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const [userResponse, repositoriesResponse] = await Promise.all([
+  const privateReposPromise = token
+    ? getPrivateRepositoryCount(headers, token)
+    : Promise.resolve(getPrivateRepositoryFallback());
+
+  const [userResponse, repositoriesResponse, privateRepos] = await Promise.all([
     fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
       cache: 'force-cache',
       headers,
@@ -69,6 +80,7 @@ async function getPortfolioFromGitHub(): Promise<PortfolioResponse> {
         headers,
       },
     ),
+    privateReposPromise,
   ]);
 
   if (!userResponse.ok || !repositoriesResponse.ok) {
@@ -88,6 +100,7 @@ async function getPortfolioFromGitHub(): Promise<PortfolioResponse> {
     bio: user.bio,
     location: user.location,
     publicRepos: user.public_repos,
+    privateRepos,
     followers: user.followers,
   };
 
@@ -116,3 +129,37 @@ async function getPortfolioFromGitHub(): Promise<PortfolioResponse> {
   };
 }
 
+
+async function getPrivateRepositoryCount(headers: HeadersInit, token: string) {
+  try {
+    const response = await fetch('https://api.github.com/user', {
+      cache: 'no-store',
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) return getPrivateRepositoryFallback();
+
+    const authenticatedUser = (await response.json()) as GitHubAuthenticatedUserResponse;
+    if (authenticatedUser.login.toLocaleLowerCase() !== GITHUB_USERNAME.toLocaleLowerCase()) {
+      return getPrivateRepositoryFallback();
+    }
+
+    return (
+      authenticatedUser.owned_private_repos ??
+      authenticatedUser.total_private_repos ??
+      getPrivateRepositoryFallback()
+    );
+  } catch {
+    return getPrivateRepositoryFallback();
+  }
+}
+
+function getPrivateRepositoryFallback() {
+  const configured = Number.parseInt(process.env.PRIVATE_REPO_COUNT ?? '', 10);
+  return Number.isFinite(configured) && configured >= 0
+    ? configured
+    : VERIFIED_PRIVATE_REPO_COUNT;
+}

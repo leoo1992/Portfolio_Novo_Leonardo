@@ -3,15 +3,7 @@
 import { useDeferredValue, useMemo } from 'react';
 import type { PortfolioProject } from '@/types/github';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import {
-  resetFilters,
-  setIncludeArchived,
-  setLanguage,
-  setOnlyWithDemo,
-  setQuery,
-  setSort,
-  type ProjectSort,
-} from '@/store/projects-slice';
+import { resetFilters, setLanguage, setQuery } from '@/store/projects-slice';
 import { useExperience } from './experience-provider';
 import { ArrowUpRightIcon, ForkIcon, SearchIcon, StarIcon } from './icons';
 import { TiltSurface } from './tilt-surface';
@@ -29,17 +21,21 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
   const deferredQuery = useDeferredValue(ui.query);
   const { localeTag, t } = useExperience();
 
-  const languages = useMemo(
-    () => [...new Set(projects.map((project) => project.language).filter(Boolean) as string[])].sort(),
+  const demoProjects = useMemo(
+    () => projects.filter((project) => Boolean(project.homepage)),
     [projects],
+  );
+
+  const languages = useMemo(
+    () =>
+      [...new Set(demoProjects.map((project) => project.language).filter(Boolean) as string[])].sort(),
+    [demoProjects],
   );
 
   const filtered = useMemo(() => {
     const query = deferredQuery.trim().toLocaleLowerCase(localeTag);
 
-    return [...projects]
-      .filter((project) => ui.includeArchived || !project.archived)
-      .filter((project) => !ui.onlyWithDemo || Boolean(project.homepage))
+    return [...demoProjects]
       .filter((project) => ui.language === 'all' || project.language === ui.language)
       .filter((project) => {
         if (!query) return true;
@@ -55,13 +51,11 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
 
         return haystack.includes(query);
       })
-      .sort((a, b) => {
-        if (ui.sort === 'stars') return b.stars - a.stars;
-        if (ui.sort === 'forks') return b.forks - a.forks;
-        if (ui.sort === 'name') return a.name.localeCompare(b.name, localeTag);
-        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-      });
-  }, [deferredQuery, localeTag, projects, ui]);
+      .sort(
+        (a, b) =>
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+      );
+  }, [deferredQuery, demoProjects, localeTag, ui.language]);
 
   return (
     <section id="projetos" className="projects-section" aria-labelledby="projects-title">
@@ -73,7 +67,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
           </div>
           <p className="results-count" aria-live="polite">
             <strong>{filtered.length}</strong>
-            <span>/ {projects.length} {t('results')}</span>
+            <span>/ {demoProjects.length} {t('results')}</span>
           </p>
         </div>
 
@@ -103,40 +97,6 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
                   <option key={language}>{language}</option>
                 ))}
               </select>
-            </label>
-
-            <label>
-              <span className="sr-only">{t('sortLabel')}</span>
-              <select
-                aria-label={t('sortLabel')}
-                value={ui.sort}
-                onChange={(event) => dispatch(setSort(event.target.value as ProjectSort))}
-              >
-                <option value="updated">{t('sortUpdated')}</option>
-                <option value="stars">{t('sortStars')}</option>
-                <option value="forks">{t('sortForks')}</option>
-                <option value="name">{t('sortName')}</option>
-              </select>
-            </label>
-          </div>
-
-          <div className="filter-toggles">
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={ui.includeArchived}
-                onChange={(event) => dispatch(setIncludeArchived(event.target.checked))}
-              />
-              {t('includeArchived')}
-            </label>
-
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={ui.onlyWithDemo}
-                onChange={(event) => dispatch(setOnlyWithDemo(event.target.checked))}
-              />
-              {t('onlyDemo')}
             </label>
           </div>
         </div>
@@ -191,11 +151,9 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
                     </div>
 
                     <div className="project-links">
-                      {project.homepage ? (
-                        <a href={project.homepage} target="_blank" rel="noreferrer">
-                          {t('demo')} <ArrowUpRightIcon />
-                        </a>
-                      ) : null}
+                      <a href={project.homepage!} target="_blank" rel="noreferrer">
+                        {t('demo')} <ArrowUpRightIcon />
+                      </a>
                       <a href={project.url} target="_blank" rel="noreferrer">
                         {t('code')} <ArrowUpRightIcon />
                       </a>

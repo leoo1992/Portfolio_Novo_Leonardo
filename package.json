@@ -10,7 +10,8 @@
     "lint": "npm run lint -w @portfolio/api && npm run lint -w @portfolio/web",
     "typecheck": "npm run typecheck -w @portfolio/api && npm run typecheck -w @portfolio/web",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "agent:vercel": "npx plugins add vercel/vercel-plugin"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

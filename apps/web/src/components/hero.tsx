@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { Link } from 'react-router-dom';
 import type { GitHubProfile } from '@/types/github';
 import { useExperience } from './experience-provider';
 import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon } from './icons';
@@ -15,7 +16,12 @@ interface HeroProps {
   starsTotal: number;
 }
 
-export function Hero({ profile, projectCount, languageCount, starsTotal }: HeroProps) {
+export function Hero({
+  profile,
+  projectCount,
+  languageCount,
+  starsTotal,
+}: HeroProps) {
   const { t } = useExperience();
 
   return (
@@ -32,9 +38,9 @@ export function Hero({ profile, projectCount, languageCount, starsTotal }: HeroP
           <p className="hero-copy">{t('heroCopy')}</p>
 
           <div className="hero-actions">
-            <a className="button button-primary" href="#projetos">
+            <Link className="button button-primary" to="/projects">
               {t('projectsCta')} <ArrowUpRightIcon />
-            </a>
+            </Link>
             <a
               className="button button-secondary"
               href={profile.profileUrl}

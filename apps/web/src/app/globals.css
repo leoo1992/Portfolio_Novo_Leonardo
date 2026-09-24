@@ -1887,3 +1887,19 @@ h1 {
     padding-left: 48px;
   }
 }
+
+
+/* React Router navigation */
+.nav-link-active {
+  color: var(--text);
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.router-projects-view {
+  min-height: calc(100vh - 180px);
+}
+
+.router-projects-view .projects-section {
+  padding-top: clamp(48px, 7vw, 92px);
+}

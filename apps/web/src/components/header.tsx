@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { type Locale, useExperience } from './experience-provider';
 import { GitHubIcon, LinkedInIcon, MoonIcon, SunIcon } from './icons';
 
@@ -52,7 +53,9 @@ function LanguageSelector() {
   const { locale, setLocale, t } = useExperience();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
-  const selected = languageOptions.find((option) => option.locale === locale) ?? languageOptions[0]!;
+  const selected =
+    languageOptions.find((option) => option.locale === locale) ??
+    languageOptions[0]!;
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {
@@ -124,21 +127,40 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="shell header-inner">
-        <a className="brand" href="#top" aria-label="Leonardo Santos — home">
+        <Link className="brand" to="/" aria-label="Leonardo Santos — home">
           <span className="brand-mark" aria-hidden="true">LS</span>
           <span className="brand-copy">
             <strong>Leonardo Santos</strong>
             <small>Software Developer</small>
           </span>
-        </a>
+        </Link>
 
         <div className="header-actions">
           <nav aria-label={t('navLabel')}>
-            <a className="nav-link" href="#projetos">{t('navProjects')}</a>
-            <a className="icon-link" href="https://github.com/leoo1992" target="_blank" rel="noreferrer" aria-label={t('navGithub')}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? 'nav-link nav-link-active' : 'nav-link'
+              }
+              to="/projects"
+            >
+              {t('navProjects')}
+            </NavLink>
+            <a
+              className="icon-link"
+              href="https://github.com/leoo1992"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t('navGithub')}
+            >
               <GitHubIcon />
             </a>
-            <a className="icon-link" href={LINKEDIN_URL} target="_blank" rel="noreferrer" aria-label={t('navLinkedin')}>
+            <a
+              className="icon-link"
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={t('navLinkedin')}
+            >
               <LinkedInIcon />
             </a>
           </nav>

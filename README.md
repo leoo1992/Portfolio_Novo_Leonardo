@@ -1,12 +1,13 @@
 # Leonardo Santos Custódio — Portfolio
 
-Portfolio full-stack com Next.js, NestJS, Redux Toolkit e Tailwind CSS.
+Portfolio full-stack com Next.js, NestJS, Redux Toolkit, React Router e Tailwind CSS.
 
 ## Arquitetura
 
-- `apps/web`: Next.js App Router + React + Redux Toolkit + Tailwind CSS
+- `apps/web`: Next.js App Router + React + React Router + Redux Toolkit + Tailwind CSS
 - `apps/api`: NestJS que consulta a API pública do GitHub, normaliza os dados e aplica cache
 - Monorepo com npm workspaces
+- React Router usa navegação hash-based no frontend para preservar compatibilidade com o `output: 'export'` do Next.js
 
 ## Segurança e privacidade
 
@@ -28,6 +29,29 @@ npm run dev
 
 Frontend: `http://localhost:3000`
 API: `http://localhost:4000/api`
+
+## Navegação
+
+O frontend usa `react-router` / `react-router-dom` para navegação client-side:
+
+```text
+#/          Home
+#/projects  Projetos
+```
+
+## Vercel Plugin para agentes
+
+```bash
+npx plugins add vercel/vercel-plugin
+```
+
+Ou, pela raiz do monorepo:
+
+```bash
+npm run agent:vercel
+```
+
+O plugin é usado por agentes de desenvolvimento e não é incluído no runtime do site.
 
 ## Variáveis de ambiente
 
@@ -54,8 +78,6 @@ A estratégia recomendada é criar **dois projetos Vercel a partir do mesmo mono
    - Root Directory: `apps/web`
    - Variáveis: `API_INTERNAL_URL=https://<url-da-api>` e `NEXT_PUBLIC_SITE_URL=https://<seu-dominio>`
 
-O frontend usa rewrite server-side para `/api/backend/*`, evitando expor detalhes desnecessários da API ao browser.
-
 ## Qualidade
 
 - TypeScript estrito
@@ -69,4 +91,4 @@ O frontend usa rewrite server-side para `/api/backend/*`, evitando expor detalhe
 - suporte a `prefers-reduced-motion`
 - touch targets adequados
 - layout responsivo para mobile/desktop
-- dark mode via `prefers-color-scheme`
+- dark mode

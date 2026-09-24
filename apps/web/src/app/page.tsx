@@ -1,7 +1,4 @@
-import { Footer } from '@/components/footer';
-import { Header } from '@/components/header';
-import { Hero } from '@/components/hero';
-import { ProjectsBrowser } from '@/components/projects-browser';
+import { PortfolioRouter } from '@/components/portfolio-router';
 import { getPortfolio } from '@/lib/portfolio-api';
 import { getSiteUrl } from '@/lib/site-url';
 
@@ -15,7 +12,10 @@ export default async function HomePage() {
   const languageCount = new Set(
     portfolio.projects.map((project) => project.language).filter(Boolean),
   ).size;
-  const starsTotal = portfolio.projects.reduce((total, project) => total + project.stars, 0);
+  const starsTotal = portfolio.projects.reduce(
+    (total, project) => total + project.stars,
+    0,
+  );
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -28,22 +28,18 @@ export default async function HomePage() {
 
   return (
     <>
-      <div className="ambient ambient-one" aria-hidden="true" />
-      <div className="ambient ambient-two" aria-hidden="true" />
-      <Header />
-      <main id="conteudo">
-        <Hero
-          profile={portfolio.profile}
-          projectCount={projectCount}
-          languageCount={languageCount}
-          starsTotal={starsTotal}
-        />
-        <ProjectsBrowser projects={portfolio.projects} />
-      </main>
-      <Footer />
+      <PortfolioRouter
+        profile={portfolio.profile}
+        projects={portfolio.projects}
+        projectCount={projectCount}
+        languageCount={languageCount}
+        starsTotal={starsTotal}
+      />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        }}
       />
     </>
   );

@@ -48,7 +48,7 @@ const VERIFIED_DEMOS: Record<string, string> = {
   'leoo1992/inputSvelte': 'https://input-svelte.vercel.app',
   'leoo1992/GeradorQRCode': 'https://gerador-qr-code-lovat.vercel.app',
   'leoo1992/task-list': 'https://task-list-beta-sandy.vercel.app',
-  'leoo1992/pulsebi': 'https://pulsebi-three.vercel.app/overview',
+  'leoo1992/pulsebi': 'https://pulsebi-three.vercel.app',
 };
 
 export async function getPortfolio(): Promise<PortfolioResponse> {

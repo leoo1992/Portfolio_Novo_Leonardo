@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import styles from './bi-dashboard.module.css';
 
@@ -335,10 +336,10 @@ export function BiDashboard() {
       <div className={styles.glowTwo} aria-hidden="true" />
 
       <header className={styles.topbar}>
-        <a className={styles.backLink} href="/">
+        <Link className={styles.backLink} href="/">
           <span aria-hidden="true">←</span>
           Portfólio
-        </a>
+        </Link>
         <div className={styles.liveBadge}>
           <span />
           Demo interativa

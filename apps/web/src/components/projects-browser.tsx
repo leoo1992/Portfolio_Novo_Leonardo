@@ -19,14 +19,45 @@ function projectMark(name: string) {
   return (clean.slice(0, 2) || 'PR').toUpperCase();
 }
 
+interface DisplayProject extends PortfolioProject {
+  privateWork?: boolean;
+  completedWork?: boolean;
+}
+
+const LEGGO_PROJECT: DisplayProject = {
+  id: -1,
+  name: 'LEGGO Construções',
+  fullName: 'Projeto comercial privado / LEGGO Construções',
+  description:
+    'Site institucional para construtora especializada em soluções ICF, com apresentação de serviços, obras, modelos e canais de contato.',
+  url: 'https://www.construtoraleggo.com.br/',
+  homepage: 'https://www.construtoraleggo.com.br/',
+  language: null,
+  topics: ['Projeto comercial', 'Site institucional', 'ICF', 'Responsivo'],
+  stars: 0,
+  forks: 0,
+  isFork: false,
+  archived: false,
+  updatedAt: '1970-01-01T00:00:00Z',
+  privateWork: true,
+  completedWork: true,
+};
+
 export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) {
   const dispatch = useAppDispatch();
   const ui = useAppSelector((state) => state.projectsUi);
   const deferredQuery = useDeferredValue(ui.query);
   const { localeTag, t } = useExperience();
 
-  const demoProjects = useMemo(
-    () => projects.filter((project) => Boolean(project.homepage)),
+  const demoProjects = useMemo<DisplayProject[]>(
+    () => [
+      LEGGO_PROJECT,
+      ...projects.filter(
+        (project) =>
+          project.name.toLocaleLowerCase() !== 'guessnumber' &&
+          Boolean(project.homepage),
+      ),
+    ],
     [projects],
   );
 
@@ -55,10 +86,11 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
 
         return haystack.includes(query);
       })
-      .sort(
-        (a, b) =>
-          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
-      );
+      .sort((a, b) => {
+        if (a.privateWork !== b.privateWork) return a.privateWork ? -1 : 1;
+
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+      });
   }, [deferredQuery, demoProjects, localeTag, ui.language]);
 
   return (
@@ -114,7 +146,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
           <div className="work-list">
             {filtered.map((project, index) => (
               <article
-                className="work-item"
+                className={project.privateWork ? 'work-item work-item-private' : 'work-item'}
                 data-reveal
                 key={project.id}
                 style={{ '--work-index': index } as CSSProperties}
@@ -125,8 +157,17 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
 
                 <div className="work-main">
                   <div className="work-meta">
-                    <span>{project.language ?? t('projectGeneric')}</span>
-                    <span>{formatDate(project.updatedAt, localeTag)}</span>
+                    <span>
+                      {project.privateWork
+                        ? t('privateProject')
+                        : project.language ?? t('projectGeneric')}
+                    </span>
+                    {!project.privateWork ? (
+                      <span>{formatDate(project.updatedAt, localeTag)}</span>
+                    ) : null}
+                    {project.completedWork ? (
+                      <span className="work-completed-chip">{t('completedWork')}</span>
+                    ) : null}
                     {project.archived ? <span>{t('archived')}</span> : null}
                   </div>
 
@@ -148,8 +189,11 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
                 <div className="work-poster" aria-hidden="true">
                   <span className="work-poster-mark">{projectMark(project.name)}</span>
                   <span className="work-poster-language">
-                    {project.language ?? 'CODE'}
+                    {project.privateWork ? 'CLIENT WORK' : project.language ?? 'CODE'}
                   </span>
+                  {project.completedWork ? (
+                    <span className="work-completed-ribbon">{t('completedWork')}</span>
+                  ) : null}
                   <i className="work-poster-orbit" />
                   <i className="work-poster-cross work-poster-cross-a" />
                   <i className="work-poster-cross work-poster-cross-b" />
@@ -157,8 +201,14 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
 
                 <div className="work-side">
                   <div className="work-stats">
-                    <span><StarIcon /> {project.stars}</span>
-                    <span><ForkIcon /> {project.forks}</span>
+                    {project.privateWork ? (
+                      <span className="work-client-label">{t('commercialDelivery')}</span>
+                    ) : (
+                      <>
+                        <span><StarIcon /> {project.stars}</span>
+                        <span><ForkIcon /> {project.forks}</span>
+                      </>
+                    )}
                   </div>
 
                   <div className="work-actions">
@@ -166,10 +216,12 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
                       <span>{t('demo')}</span>
                       <ArrowUpRightIcon />
                     </a>
-                    <a href={project.url} target="_blank" rel="noreferrer">
-                      <span>{t('code')}</span>
-                      <ArrowUpRightIcon />
-                    </a>
+                    {!project.privateWork ? (
+                      <a href={project.url} target="_blank" rel="noreferrer">
+                        <span>{t('code')}</span>
+                        <ArrowUpRightIcon />
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               </article>

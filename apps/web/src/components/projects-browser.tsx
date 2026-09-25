@@ -60,7 +60,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
   return (
     <section id="projetos" className="projects-section" aria-labelledby="projects-title">
       <div className="shell">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <div>
             <p className="eyebrow">{t('projectsEyebrow')}</p>
             <h2 id="projects-title">{t('projectsTitle')}</h2>
@@ -71,7 +71,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
           </p>
         </div>
 
-        <div className="filters-panel filters-panel-compact">
+        <div className="filters-panel filters-panel-compact" data-reveal>
           <div className="filters project-filters" role="search" aria-label={t('filtersLabel')}>
             <label className="filter-field search-field project-search">
               <span className="sr-only">{t('searchLabel')}</span>
@@ -120,7 +120,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
           <div className="projects-grid">
             {filtered.map((project) => (
               <TiltSurface className="project-tilt" key={project.id}>
-                <article className="project-card">
+                <article className="project-card" data-reveal>
                   <div className="project-card-topline">
                     <div className="project-badges">
                       <span className="project-language">

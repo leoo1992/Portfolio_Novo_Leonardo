@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import type { GitHubProfile } from '@/types/github';
 import { useExperience } from './experience-provider';
 import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon } from './icons';
-import { TiltSurface } from './tilt-surface';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/leocustodio1992/';
 
@@ -25,108 +24,118 @@ export function Hero({
   const { t } = useExperience();
 
   return (
-    <section id="top" className="hero" aria-labelledby="hero-title">
-      <div className="shell hero-grid">
-        <div className="hero-content" data-reveal>
-          <div className="hero-chapter" aria-hidden="true">
-            <span className="hero-chapter-index">01</span>
-            <span className="hero-chapter-label">PORTFOLIO / SOFTWARE</span>
-          </div>
-          <div className="signal-line" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </div>
-          <p className="eyebrow">{t('heroEyebrow')}</p>
-          <h1 id="hero-title">{t('heroTitle')}</h1>
-          <p className="hero-copy">{t('heroCopy')}</p>
+    <section id="top" className="hero creative-hero" aria-labelledby="hero-title">
+      <div className="hero-noise" aria-hidden="true" />
 
-          <div className="hero-actions">
-            <Link className="button button-primary" to="/projects">
-              {t('projectsCta')} <ArrowUpRightIcon />
-            </Link>
-            <a
-              className="button button-secondary"
-              href={profile.profileUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <GitHubIcon /> GitHub
-            </a>
-            <a
-              className="button button-secondary"
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <LinkedInIcon /> LinkedIn
-            </a>
-          </div>
-
-          <dl className="hero-metrics" aria-label="Portfolio metrics">
-            <div>
-              <dt>{t('repositories')}</dt>
-              <dd>{projectCount}</dd>
-            </div>
-            <div>
-              <dt>{t('technologies')}</dt>
-              <dd>{languageCount}</dd>
-            </div>
-            <div>
-              <dt>{t('stars')}</dt>
-              <dd>{starsTotal}</dd>
-            </div>
-          </dl>
+      <div className="shell creative-hero-shell">
+        <div className="hero-meta-row" data-reveal>
+          <span>PORTFOLIO / 2026</span>
+          <span className="hero-status">
+            <i aria-hidden="true" />
+            SOFTWARE · PRODUCT · INTERFACE
+          </span>
+          <span>{profile.location ?? 'BRASIL'}</span>
         </div>
 
-        <TiltSurface className="profile-tilt">
-          <aside className="profile-card" aria-label={t('githubProfile')} data-reveal>
-            <div className="profile-terminal" aria-hidden="true">
-              <span className="profile-terminal-dots">
-                <i />
-                <i />
-                <i />
-              </span>
-              <span>github://{profile.login}</span>
-            </div>
-            <div className="profile-halo" aria-hidden="true" />
-            <Image
-              src={profile.avatarUrl}
-              width={104}
-              height={104}
-              priority
-              sizes="104px"
-              alt={profile.name}
-              className="avatar"
-            />
-            <div>
-              <p className="profile-name">{profile.name}</p>
-              <p className="profile-login">@{profile.login}</p>
+        <div className="kinetic-title" data-reveal>
+          <p className="eyebrow">{t('heroEyebrow')}</p>
+          <h1 id="hero-title" aria-label={t('heroTitle')}>
+            <span className="kinetic-line kinetic-line-solid">BUILD</span>
+            <span className="kinetic-line kinetic-line-outline">BEYOND</span>
+            <span className="kinetic-line kinetic-line-offset">EXPECTED.</span>
+          </h1>
+        </div>
+
+        <div className="hero-lower-grid">
+          <div className="hero-manifesto" data-reveal>
+            <p className="hero-copy">{t('heroCopy')}</p>
+
+            <div className="hero-actions">
+              <Link className="button button-primary magnetic-action" to="/projects">
+                <span>{t('projectsCta')}</span>
+                <ArrowUpRightIcon />
+              </Link>
+
+              <div className="hero-social-actions">
+                <a
+                  className="text-link"
+                  href={profile.profileUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <GitHubIcon /> GitHub
+                </a>
+                <a
+                  className="text-link"
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <LinkedInIcon /> LinkedIn
+                </a>
+              </div>
             </div>
 
-            {profile.location ? (
-              <p className="profile-location">
-                <span>{t('profileLocation')}</span>
-                {profile.location}
-              </p>
-            ) : null}
-
-            <dl className="profile-stats">
+            <dl className="hero-metrics hero-metrics-rail" aria-label="Portfolio metrics">
               <div>
-                <dt>{t('publicRepositories')}</dt>
-                <dd>{profile.publicRepos}</dd>
+                <dt>{t('repositories')}</dt>
+                <dd>{String(projectCount).padStart(2, '0')}</dd>
               </div>
               <div>
-                <dt>{t('privateRepositories')}</dt>
-                <dd>{profile.privateRepos}</dd>
+                <dt>{t('technologies')}</dt>
+                <dd>{String(languageCount).padStart(2, '0')}</dd>
               </div>
               <div>
-                <dt>{t('followers')}</dt>
-                <dd>{profile.followers}</dd>
+                <dt>{t('stars')}</dt>
+                <dd>{String(starsTotal).padStart(2, '0')}</dd>
               </div>
             </dl>
-          </aside>
-        </TiltSurface>
+          </div>
+
+          <div className="identity-orbit" data-reveal>
+            <div className="orbit-stage">
+              <div className="orbit-ring orbit-ring-one" aria-hidden="true" />
+              <div className="orbit-ring orbit-ring-two" aria-hidden="true" />
+              <div className="orbit-ring orbit-ring-three" aria-hidden="true" />
+
+              <span className="orbit-label orbit-label-one">NEXT.JS</span>
+              <span className="orbit-label orbit-label-two">REACT</span>
+              <span className="orbit-label orbit-label-three">ORACLE</span>
+              <span className="orbit-label orbit-label-four">PL/SQL</span>
+
+              <div className="portrait-frame">
+                <Image
+                  src={profile.avatarUrl}
+                  width={280}
+                  height={280}
+                  priority
+                  sizes="(max-width: 780px) 220px, 280px"
+                  alt={profile.name}
+                  className="creative-avatar"
+                />
+                <span className="portrait-index" aria-hidden="true">LS/01</span>
+              </div>
+            </div>
+
+            <div className="identity-caption">
+              <span>{profile.name}</span>
+              <span>@{profile.login}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="kinetic-marquee" aria-hidden="true">
+        <div className="kinetic-marquee-track">
+          <span>DESIGN SYSTEMS</span><i>✦</i>
+          <span>SOFTWARE ENGINEERING</span><i>✦</i>
+          <span>INTERACTION</span><i>✦</i>
+          <span>FULL-STACK</span><i>✦</i>
+          <span>DESIGN SYSTEMS</span><i>✦</i>
+          <span>SOFTWARE ENGINEERING</span><i>✦</i>
+          <span>INTERACTION</span><i>✦</i>
+          <span>FULL-STACK</span><i>✦</i>
+        </div>
       </div>
     </section>
   );

@@ -27,7 +27,11 @@ export function Hero({
   return (
     <section id="top" className="hero" aria-labelledby="hero-title">
       <div className="shell hero-grid">
-        <div className="hero-content">
+        <div className="hero-content" data-reveal>
+          <div className="hero-chapter" aria-hidden="true">
+            <span className="hero-chapter-index">01</span>
+            <span className="hero-chapter-label">PORTFOLIO / SOFTWARE</span>
+          </div>
           <div className="signal-line" aria-hidden="true">
             <span />
             <span />
@@ -76,7 +80,15 @@ export function Hero({
         </div>
 
         <TiltSurface className="profile-tilt">
-          <aside className="profile-card" aria-label={t('githubProfile')}>
+          <aside className="profile-card" aria-label={t('githubProfile')} data-reveal>
+            <div className="profile-terminal" aria-hidden="true">
+              <span className="profile-terminal-dots">
+                <i />
+                <i />
+                <i />
+              </span>
+              <span>github://{profile.login}</span>
+            </div>
             <div className="profile-halo" aria-hidden="true" />
             <Image
               src={profile.avatarUrl}

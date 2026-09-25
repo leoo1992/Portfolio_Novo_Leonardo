@@ -1,18 +1,22 @@
 'use client';
 
-import { useDeferredValue, useMemo } from 'react';
+import { useDeferredValue, useMemo, type CSSProperties } from 'react';
 import type { PortfolioProject } from '@/types/github';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { resetFilters, setLanguage, setQuery } from '@/store/projects-slice';
 import { useExperience } from './experience-provider';
 import { ArrowUpRightIcon, ForkIcon, SearchIcon, StarIcon } from './icons';
-import { TiltSurface } from './tilt-surface';
 
 function formatDate(value: string, locale: string) {
   return new Intl.DateTimeFormat(locale, {
     month: 'short',
     year: 'numeric',
   }).format(new Date(value));
+}
+
+function projectMark(name: string) {
+  const clean = name.replace(/[^a-zA-Z0-9]/g, '');
+  return (clean.slice(0, 2) || 'PR').toUpperCase();
 }
 
 export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) {
@@ -58,117 +62,117 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
   }, [deferredQuery, demoProjects, localeTag, ui.language]);
 
   return (
-    <section id="projetos" className="projects-section" aria-labelledby="projects-title">
+    <section id="projetos" className="projects-section work-index" aria-labelledby="projects-title">
       <div className="shell">
-        <div className="section-heading" data-reveal>
+        <div className="work-heading" data-reveal>
           <div>
-            <p className="eyebrow">{t('projectsEyebrow')}</p>
+            <p className="eyebrow">SELECTED / WORK</p>
             <h2 id="projects-title">{t('projectsTitle')}</h2>
           </div>
-          <p className="results-count" aria-live="polite">
-            <strong>{filtered.length}</strong>
-            <span>/ {demoProjects.length} {t('results')}</span>
-          </p>
+          <div className="work-heading-side">
+            <p>Um índice vivo de produtos, experimentos e sistemas.</p>
+            <span>{String(filtered.length).padStart(2, '0')} / {String(demoProjects.length).padStart(2, '0')}</span>
+          </div>
         </div>
 
-        <div className="filters-panel filters-panel-compact" data-reveal>
-          <div className="filters project-filters" role="search" aria-label={t('filtersLabel')}>
-            <label className="filter-field search-field project-search">
-              <span className="sr-only">{t('searchLabel')}</span>
-              <span className="filter-leading-icon" aria-hidden="true">
-                <SearchIcon />
-              </span>
-              <input
-                type="search"
-                value={ui.query}
-                onChange={(event) => dispatch(setQuery(event.target.value))}
-                placeholder={t('searchPlaceholder')}
-                autoComplete="off"
-              />
-            </label>
+        <div className="work-toolbar" data-reveal>
+          <label className="work-search">
+            <SearchIcon />
+            <span className="sr-only">{t('searchLabel')}</span>
+            <input
+              type="search"
+              value={ui.query}
+              onChange={(event) => dispatch(setQuery(event.target.value))}
+              placeholder={t('searchPlaceholder')}
+              autoComplete="off"
+            />
+          </label>
 
-            <label className="filter-field project-language-filter">
-              <span className="sr-only">{t('languageFilter')}</span>
-              <span className="filter-leading-icon filter-code-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="m9 7-5 5 5 5M15 7l5 5-5 5" />
-                </svg>
-              </span>
-              <select
-                aria-label={t('languageFilter')}
-                value={ui.language}
-                onChange={(event) => dispatch(setLanguage(event.target.value))}
-              >
-                <option value="all">{t('allLanguages')}</option>
-                {languages.map((language) => (
-                  <option key={language}>{language}</option>
-                ))}
-              </select>
-              <span className="filter-chevron" aria-hidden="true">⌄</span>
-            </label>
-          </div>
+          <label className="work-language">
+            <span className="sr-only">{t('languageFilter')}</span>
+            <select
+              aria-label={t('languageFilter')}
+              value={ui.language}
+              onChange={(event) => dispatch(setLanguage(event.target.value))}
+            >
+              <option value="all">{t('allLanguages')}</option>
+              {languages.map((language) => (
+                <option key={language}>{language}</option>
+              ))}
+            </select>
+          </label>
         </div>
 
         {filtered.length === 0 ? (
-          <div className="empty-state" role="status">
+          <div className="empty-state work-empty" role="status">
             <p>{t('emptyTitle')}</p>
             <button className="text-button" type="button" onClick={() => dispatch(resetFilters())}>
               {t('clearFilters')}
             </button>
           </div>
         ) : (
-          <div className="projects-grid">
-            {filtered.map((project) => (
-              <TiltSurface className="project-tilt" key={project.id}>
-                <article className="project-card" data-reveal>
-                  <div className="project-card-topline">
-                    <div className="project-badges">
-                      <span className="project-language">
-                        {project.language ?? t('projectGeneric')}
-                      </span>
-                      {project.archived ? (
-                        <span className="archive-badge">{t('archived')}</span>
-                      ) : null}
-                    </div>
-                    <span className="project-meta">
-                      {formatDate(project.updatedAt, localeTag)}
-                    </span>
+          <div className="work-list">
+            {filtered.map((project, index) => (
+              <article
+                className="work-item"
+                data-reveal
+                key={project.id}
+                style={{ '--work-index': index } as CSSProperties}
+              >
+                <div className="work-number" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+
+                <div className="work-main">
+                  <div className="work-meta">
+                    <span>{project.language ?? t('projectGeneric')}</span>
+                    <span>{formatDate(project.updatedAt, localeTag)}</span>
+                    {project.archived ? <span>{t('archived')}</span> : null}
                   </div>
 
                   <h3>{project.name}</h3>
-                  <p className="project-description">
+
+                  <p className="work-description">
                     {project.description ?? t('projectFallback')}
                   </p>
 
                   {project.topics.length > 0 ? (
-                    <ul className="topics" aria-label={t('topicsLabel')}>
-                      {project.topics.slice(0, 5).map((topic) => (
+                    <ul className="work-topics" aria-label={t('topicsLabel')}>
+                      {project.topics.slice(0, 4).map((topic) => (
                         <li key={topic}>{topic}</li>
                       ))}
                     </ul>
                   ) : null}
+                </div>
 
-                  <div className="project-footer">
-                    <div className="project-stats">
-                      <span className="stars" aria-label={String(project.stars) + ' ' + t('stars')}>
-                        <StarIcon /> {project.stars}
-                      </span>
-                      <span className="stars" aria-label={String(project.forks) + ' ' + t('forks')}>
-                        <ForkIcon /> {project.forks}
-                      </span>
-                    </div>
+                <div className="work-poster" aria-hidden="true">
+                  <span className="work-poster-mark">{projectMark(project.name)}</span>
+                  <span className="work-poster-language">
+                    {project.language ?? 'CODE'}
+                  </span>
+                  <i className="work-poster-orbit" />
+                  <i className="work-poster-cross work-poster-cross-a" />
+                  <i className="work-poster-cross work-poster-cross-b" />
+                </div>
 
-                    <div className="project-links">
-                      <a href={project.homepage!} target="_blank" rel="noreferrer">
-                        {t('demo')} <ArrowUpRightIcon />
-                      </a>
-                      <a href={project.url} target="_blank" rel="noreferrer">
-                        {t('code')} <ArrowUpRightIcon />
-                      </a>
-                    </div>
+                <div className="work-side">
+                  <div className="work-stats">
+                    <span><StarIcon /> {project.stars}</span>
+                    <span><ForkIcon /> {project.forks}</span>
                   </div>
-                </article>
-              </TiltSurface>
+
+                  <div className="work-actions">
+                    <a href={project.homepage!} target="_blank" rel="noreferrer">
+                      <span>{t('demo')}</span>
+                      <ArrowUpRightIcon />
+                    </a>
+                    <a href={project.url} target="_blank" rel="noreferrer">
+                      <span>{t('code')}</span>
+                      <ArrowUpRightIcon />
+                    </a>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
         )}

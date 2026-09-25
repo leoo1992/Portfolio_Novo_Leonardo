@@ -12,6 +12,7 @@ import type { Navigator, To } from 'react-router';
 import type { GitHubProfile, PortfolioProject } from '@/types/github';
 import { Footer } from './footer';
 import { Header } from './header';
+import { MotionLayer } from './motion-layer';
 import { Hero } from './hero';
 import { ProjectsBrowser } from './projects-browser';
 
@@ -88,14 +89,17 @@ export function PortfolioRouter({
 
   return (
     <Router location={location} navigator={navigator}>
+      <MotionLayer />
       <div className="ambient ambient-one" aria-hidden="true" />
       <div className="ambient ambient-two" aria-hidden="true" />
       <Header />
-      <Routes>
-        <Route path="/" element={homeView} />
-        <Route path="/projects" element={projectsView} />
-        <Route path="*" element={<Navigate replace to="/" />} />
-      </Routes>
+      <div className="route-stage" key={location}>
+        <Routes>
+          <Route path="/" element={homeView} />
+          <Route path="/projects" element={projectsView} />
+          <Route path="*" element={<Navigate replace to="/" />} />
+        </Routes>
+      </div>
       <Footer />
     </Router>
   );

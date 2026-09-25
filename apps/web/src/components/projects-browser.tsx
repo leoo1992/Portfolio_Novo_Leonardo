@@ -1,6 +1,6 @@
 'use client';
 
-import { useDeferredValue, useMemo } from 'react';
+import { useDeferredValue, useMemo, type CSSProperties } from 'react';
 import type { PortfolioProject } from '@/types/github';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { resetFilters, setLanguage, setQuery } from '@/store/projects-slice';
@@ -117,7 +117,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
                 className="work-item"
                 data-reveal
                 key={project.id}
-                style={{ '--work-index': index } as React.CSSProperties}
+                style={{ '--work-index': index } as CSSProperties}
               >
                 <div className="work-number" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}

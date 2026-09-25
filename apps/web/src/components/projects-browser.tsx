@@ -24,6 +24,23 @@ interface DisplayProject extends PortfolioProject {
   completedWork?: boolean;
 }
 
+const FLOWPILOT_PROJECT: DisplayProject = {
+  id: -2,
+  name: 'FlowPilot',
+  fullName: 'leoo1992/workflows-poc',
+  description:
+    'Editor visual de automação de workflows com nodes conectáveis, validação de grafos, execução simulada, logs e persistência local.',
+  url: 'https://github.com/leoo1992/workflows-poc',
+  homepage: 'https://workflows-poc-ebon.vercel.app/',
+  language: 'TypeScript',
+  topics: ['Next.js', 'TypeScript', 'React Flow', 'Automação'],
+  stars: 0,
+  forks: 0,
+  isFork: false,
+  archived: false,
+  updatedAt: '2026-09-25T13:14:54Z',
+};
+
 const LEGGO_PROJECT: DisplayProject = {
   id: -1,
   name: 'LEGGO Construções',
@@ -52,10 +69,17 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
   const demoProjects = useMemo<DisplayProject[]>(
     () => [
       LEGGO_PROJECT,
+      FLOWPILOT_PROJECT,
       ...projects.filter(
-        (project) =>
-          project.name.toLocaleLowerCase() !== 'guessnumber' &&
-          Boolean(project.homepage),
+        (project) => {
+          const name = project.name.toLocaleLowerCase();
+
+          return (
+            name !== 'guessnumber' &&
+            name !== 'workflows-poc' &&
+            Boolean(project.homepage)
+          );
+        },
       ),
     ],
     [projects],

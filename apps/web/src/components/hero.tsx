@@ -37,13 +37,14 @@ export function Hero({
           <span>{profile.location ?? 'BRASIL'}</span>
         </div>
 
-        <div className="kinetic-title" data-reveal>
+        <div className="hero-identity" data-reveal>
           <p className="eyebrow">{t('heroEyebrow')}</p>
-          <h1 id="hero-title" aria-label={t('heroTitle')}>
-            <span className="kinetic-line kinetic-line-solid">BUILD</span>
-            <span className="kinetic-line kinetic-line-outline">BEYOND</span>
-            <span className="kinetic-line kinetic-line-offset">EXPECTED.</span>
-          </h1>
+          <div className="hero-identity-row">
+            <h1 id="hero-title">Leonardo Santos</h1>
+            <p className="hero-identity-note" aria-label={t('heroTitle')}>
+              FULL-STACK / PRODUCT / INTERFACE
+            </p>
+          </div>
         </div>
 
         <div className="hero-lower-grid">

@@ -261,6 +261,11 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
+
+    const themeColor = theme === 'dark' ? '#08090b' : '#f1eee6';
+    document
+      .querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')
+      .forEach((meta) => meta.setAttribute('content', themeColor));
   }, [theme]);
 
   const t = useCallback((key: TranslationKey) => dictionary[locale][key], [locale]);

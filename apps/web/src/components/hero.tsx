@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import type { GitHubProfile } from '@/types/github';
 import { useExperience } from './experience-provider';
 import { ArrowUpRightIcon, GitHubIcon, LinkedInIcon } from './icons';
+import { DeveloperScene } from './developer-scene';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/leocustodio1992/';
 
@@ -26,6 +27,7 @@ export function Hero({
   return (
     <section id="top" className="hero creative-hero" aria-labelledby="hero-title">
       <div className="hero-noise" aria-hidden="true" />
+      <DeveloperScene />
 
       <div className="shell creative-hero-shell">
         <div className="hero-meta-row" data-reveal>

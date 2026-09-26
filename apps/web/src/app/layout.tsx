@@ -7,6 +7,7 @@ import { StoreProvider } from '@/store/provider';
 import './globals.css';
 import './mobile.css';
 import './creative.css';
+import './professional.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-body', display: 'swap' });
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-display', display: 'swap' });

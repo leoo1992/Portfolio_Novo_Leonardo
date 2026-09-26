@@ -122,6 +122,7 @@ function LanguageSelector() {
 
 export function Header() {
   const { theme, setTheme, t } = useExperience();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
 
   return (
@@ -179,8 +180,13 @@ export function Header() {
               <span className="theme-switcher-icon theme-switcher-moon" aria-hidden="true"><MoonIcon /></span>
             </button>
           </div>
+          <button className="mobile-menu-trigger" type="button" aria-label="Abrir navegação" aria-expanded={mobileOpen} aria-controls="mobile-navigation" onClick={() => setMobileOpen(v => !v)}><span/><span/><span/></button>
         </div>
       </div>
+      <nav id="mobile-navigation" className={mobileOpen ? 'mobile-navigation open' : 'mobile-navigation'} aria-label="Navegação móvel">
+        <a href="#/" onClick={() => setMobileOpen(false)}>Início</a>
+        <a href="#/projects" onClick={() => setMobileOpen(false)}>Projetos</a>
+      </nav>
     </header>
   );
 }

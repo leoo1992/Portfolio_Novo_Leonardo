@@ -138,6 +138,8 @@ export function Header() {
 
         <div className="header-actions">
           <nav aria-label={t('navLabel')}>
+            <NavLink className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} to="/" end>Início</NavLink>
+            <NavLink className={({ isActive }) => isActive ? 'nav-link nav-link-active' : 'nav-link'} to="/profile">Perfil</NavLink>
             <NavLink
               className={({ isActive }) =>
                 isActive ? 'nav-link nav-link-active' : 'nav-link'
@@ -185,9 +187,9 @@ export function Header() {
     </header>
       <nav className="mobile-tab-bar" aria-label="Navegação mobile">
         <NavLink to="/" end className={({isActive}) => isActive ? 'mobile-tab active' : 'mobile-tab'}><span className="mobile-tab-icon" aria-hidden="true">⌂</span><span>Início</span></NavLink>
+        <NavLink to="/profile" className={({isActive}) => isActive ? 'mobile-tab active' : 'mobile-tab'}><span className="mobile-tab-icon" aria-hidden="true">◉</span><span>Perfil</span></NavLink>
         <NavLink to="/projects" className={({isActive}) => isActive ? 'mobile-tab active' : 'mobile-tab'}><span className="mobile-tab-icon" aria-hidden="true">▦</span><span>{t('navProjects')}</span></NavLink>
         <a className="mobile-tab" href="https://github.com/leoo1992" target="_blank" rel="noreferrer"><GitHubIcon/><span>GitHub</span></a>
-        <a className="mobile-tab" href={LINKEDIN_URL} target="_blank" rel="noreferrer"><LinkedInIcon/><span>LinkedIn</span></a>
       </nav>
     </>
   );

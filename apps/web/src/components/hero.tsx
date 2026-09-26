@@ -108,7 +108,7 @@ export function Hero({
 
               <div className="portrait-frame">
                 <Image
-                  src={profile.avatarUrl}
+                  src="/IMG-20260923-WA0020.jpg"
                   width={280}
                   height={280}
                   priority

@@ -431,3 +431,15 @@
   .section-heading h2 { font-size: 29px; }
   .project-card { padding: 14px; }
 }
+
+.mobile-menu-trigger{display:none;width:44px;height:44px;padding:11px;border:1px solid var(--border);border-radius:12px;background:var(--surface);cursor:pointer}
+.mobile-menu-trigger span{display:block;height:2px;margin:4px 0;background:var(--text);border-radius:2px}
+.mobile-navigation{display:none}
+@media(max-width:430px){
+  .mobile-menu-trigger{display:block;flex:0 0 44px}
+  .mobile-navigation{display:grid;grid-template-rows:0fr;overflow:hidden;width:min(100% - 16px,1220px);margin:0 auto;background:var(--surface-strong);border:0 solid var(--border);border-radius:0 0 14px 14px;transition:grid-template-rows .25s ease,border-width .25s ease}
+  .mobile-navigation.open{grid-template-rows:repeat(2,48px);border-width:0 1px 1px}
+  .mobile-navigation a{min-height:48px;padding:0 16px;display:flex;align-items:center;font-weight:750;overflow:hidden}
+}
+@media(max-width:360px){.mobile-menu-trigger{width:34px;height:34px;flex-basis:34px;padding:7px}}
+@media(prefers-reduced-motion:reduce){.mobile-navigation{transition:none}}

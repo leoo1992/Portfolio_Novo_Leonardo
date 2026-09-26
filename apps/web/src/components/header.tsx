@@ -185,9 +185,6 @@ export function Header() {
       </div>
       <nav id="mobile-navigation" className={mobileOpen ? 'mobile-navigation open' : 'mobile-navigation'} aria-label="Navegação móvel">
         <a href="#/" onClick={() => setMobileOpen(false)}>Início</a>
-        <a href="#sobre" onClick={() => setMobileOpen(false)}>Sobre</a>
-        <a href="#experiencia" onClick={() => setMobileOpen(false)}>Experiência</a>
-        <a href="#stack" onClick={() => setMobileOpen(false)}>Stack</a>
         <a href="#/projects" onClick={() => setMobileOpen(false)}>Projetos</a>
       </nav>
     </header>

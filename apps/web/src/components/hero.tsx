@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import leonardoPortrait from '../../IMG-20260923-WA0020.jpg';
 import { Link } from 'react-router-dom';
 import type { GitHubProfile } from '@/types/github';
 import { useExperience } from './experience-provider';
@@ -108,7 +109,7 @@ export function Hero({
 
               <div className="portrait-frame">
                 <Image
-                  src="/IMG-20260923-WA0020.jpg"
+                  src={leonardoPortrait}
                   width={280}
                   height={280}
                   priority

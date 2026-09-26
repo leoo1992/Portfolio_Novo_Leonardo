@@ -15,6 +15,7 @@ import { Header } from './header';
 import { MotionLayer } from './motion-layer';
 import { Hero } from './hero';
 import { ProjectsBrowser } from './projects-browser';
+import { ProfessionalProfile } from './professional-profile';
 
 interface PortfolioRouterProps {
   profile: GitHubProfile;
@@ -77,6 +78,7 @@ export function PortfolioRouter({
         languageCount={languageCount}
         starsTotal={starsTotal}
       />
+      <ProfessionalProfile projects={projects} />
       <ProjectsBrowser projects={projects} />
     </main>
   );

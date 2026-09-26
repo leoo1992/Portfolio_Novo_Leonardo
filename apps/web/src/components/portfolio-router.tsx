@@ -78,8 +78,12 @@ export function PortfolioRouter({
         languageCount={languageCount}
         starsTotal={starsTotal}
       />
+    </main>
+  );
+
+  const profileView = (
+    <main id="conteudo" className="router-profile-view">
       <ProfessionalProfile projects={projects} />
-      <ProjectsBrowser projects={projects} />
     </main>
   );
 
@@ -98,6 +102,7 @@ export function PortfolioRouter({
       <div className="route-stage" key={location}>
         <Routes>
           <Route path="/" element={homeView} />
+          <Route path="/profile" element={profileView} />
           <Route path="/projects" element={projectsView} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>

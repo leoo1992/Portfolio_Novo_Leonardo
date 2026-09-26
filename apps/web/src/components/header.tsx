@@ -122,7 +122,6 @@ function LanguageSelector() {
 
 export function Header() {
   const { theme, setTheme, t } = useExperience();
-  const [mobileOpen, setMobileOpen] = useState(false);
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
 
   return (
@@ -180,12 +179,13 @@ export function Header() {
               <span className="theme-switcher-icon theme-switcher-moon" aria-hidden="true"><MoonIcon /></span>
             </button>
           </div>
-          <button className="mobile-menu-trigger" type="button" aria-label="Abrir navegação" aria-expanded={mobileOpen} aria-controls="mobile-navigation" onClick={() => setMobileOpen(v => !v)}><span/><span/><span/></button>
         </div>
       </div>
-      <nav id="mobile-navigation" className={mobileOpen ? 'mobile-navigation open' : 'mobile-navigation'} aria-label="Navegação móvel">
-        <a href="#/" onClick={() => setMobileOpen(false)}>Início</a>
-        <a href="#/projects" onClick={() => setMobileOpen(false)}>Projetos</a>
+      <nav className="mobile-tab-bar" aria-label="Navegação mobile">
+        <NavLink to="/" end className={({isActive}) => isActive ? 'mobile-tab active' : 'mobile-tab'}><span className="mobile-tab-icon" aria-hidden="true">⌂</span><span>Início</span></NavLink>
+        <NavLink to="/projects" className={({isActive}) => isActive ? 'mobile-tab active' : 'mobile-tab'}><span className="mobile-tab-icon" aria-hidden="true">▦</span><span>{t('navProjects')}</span></NavLink>
+        <a className="mobile-tab" href="https://github.com/leoo1992" target="_blank" rel="noreferrer"><GitHubIcon/><span>GitHub</span></a>
+        <a className="mobile-tab" href={LINKEDIN_URL} target="_blank" rel="noreferrer"><LinkedInIcon/><span>LinkedIn</span></a>
       </nav>
     </header>
   );

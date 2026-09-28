@@ -51,6 +51,7 @@ const VERIFIED_DEMOS: Record<string, string> = {
   'leoo1992/pulsebi': 'https://pulsebi-three.vercel.app',
   'leoo1992/github-explorer': 'https://github-explorer-tawny-chi.vercel.app/',
   'leoo1992/quake-vision': 'https://quake-vision-web.vercel.app',
+  'leoo1992/sentinela-sst': 'https://sentinela-sst-git-master-leoo1992s-projects.vercel.app/',
 };
 
 export async function getPortfolio(): Promise<PortfolioResponse> {

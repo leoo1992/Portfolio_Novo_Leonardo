@@ -41,6 +41,23 @@ const FLOWPILOT_PROJECT: DisplayProject = {
   updatedAt: '2026-09-25T13:14:54Z',
 };
 
+const LEO_AI_PROJECT: DisplayProject = {
+  id: -3,
+  name: 'Léo IA',
+  fullName: 'leoo1992/Leo-AI-poc',
+  description:
+    'Assistente conversacional com interface responsiva, entrada por texto e voz, temas, idiomas e experiência de chat interativa.',
+  url: 'https://github.com/leoo1992/Leo-AI-poc',
+  homepage: 'https://chat-gpt-poc-beta.vercel.app/',
+  language: 'TypeScript',
+  topics: ['React', 'TypeScript', 'IA', 'Voice UI'],
+  stars: 1,
+  forks: 0,
+  isFork: false,
+  archived: false,
+  updatedAt: '2026-09-28T03:46:28Z',
+};
+
 const LEGGO_PROJECT: DisplayProject = {
   id: -1,
   name: 'LEGGO Construções',
@@ -69,6 +86,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
   const demoProjects = useMemo<DisplayProject[]>(
     () => [
       LEGGO_PROJECT,
+      LEO_AI_PROJECT,
       FLOWPILOT_PROJECT,
       ...projects.filter(
         (project) => {
@@ -76,6 +94,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
 
           return (
             name !== 'workflows-poc' &&
+            name !== 'leo-ai-poc' &&
             Boolean(project.homepage)
           );
         },

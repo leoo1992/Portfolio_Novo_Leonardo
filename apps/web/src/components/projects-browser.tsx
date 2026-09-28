@@ -75,7 +75,6 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
           const name = project.name.toLocaleLowerCase();
 
           return (
-            name !== 'guessnumber' &&
             name !== 'workflows-poc' &&
             Boolean(project.homepage)
           );

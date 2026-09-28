@@ -88,8 +88,8 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
       LEGGO_PROJECT,
       LEO_AI_PROJECT,
       FLOWPILOT_PROJECT,
-      ...projects.filter(
-        (project) => {
+      ...projects
+        .filter((project) => {
           const name = project.name.toLocaleLowerCase();
 
           return (
@@ -97,8 +97,17 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
             name !== 'leo-ai-poc' &&
             Boolean(project.homepage)
           );
-        },
-      ),
+        })
+        .map((project) =>
+          project.fullName === 'leoo1992/sentinela-sst'
+            ? {
+                ...project,
+                description:
+                  'Ferramenta de apoio à Segurança do Trabalho com análise por câmera ou imagem para EPI, trabalho em altura, ergonomia e levantamento de cargas.',
+                topics: ['SST', 'Visão computacional', 'Ergonomia', 'Segurança do Trabalho'],
+              }
+            : project,
+        ),
     ],
     [projects],
   );

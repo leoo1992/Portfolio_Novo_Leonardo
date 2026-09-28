@@ -103,8 +103,8 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
             ? {
                 ...project,
                 description:
-                  'Ferramenta de apoio à Segurança do Trabalho com análise por câmera ou imagem para EPI, trabalho em altura, ergonomia e levantamento de cargas.',
-                topics: ['SST', 'Visão computacional', 'Ergonomia', 'Segurança do Trabalho'],
+                  'Ferramenta de visão computacional focada em inspeção visual de EPI por câmera ou imagem, com análise combinada para capacete, óculos, vestimenta refletiva, luvas e calçado.',
+                topics: ['SST', 'EPI', 'Visão computacional', 'Segurança do Trabalho'],
               }
             : project,
         ),

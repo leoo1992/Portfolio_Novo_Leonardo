@@ -103,7 +103,7 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
             ? {
                 ...project,
                 description:
-                  'Ferramenta de visão computacional focada em inspeção visual de EPI por câmera ou imagem, com análise combinada para capacete, óculos, vestimenta refletiva, luvas e calçado.',
+                  'Ferramenta de visão computacional focada em inspeção visual de EPI por câmera ou imagem, identificando óculos, capacete, luvas e protetor auricular (plug ou abafador).',
                 topics: ['SST', 'EPI', 'Visão computacional', 'Segurança do Trabalho'],
               }
             : project,

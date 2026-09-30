@@ -106,7 +106,15 @@ export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) 
                   'Ferramenta de visão computacional focada em inspeção visual de EPI por câmera ou imagem, identificando óculos, capacete, luvas e protetor auricular (plug ou abafador).',
                 topics: ['SST', 'EPI', 'Visão computacional', 'Segurança do Trabalho'],
               }
-            : project,
+            : project.fullName === 'leoo1992/gesture-control'
+              ? {
+                  ...project,
+                  name: 'Gesture Control',
+                  description:
+                    'Controle por gestos com câmera do celular, rastreamento de mão em tempo real, conexão WebRTC e integração nativa para controlar o cursor do Windows com overlay global.',
+                  topics: ['MediaPipe', 'WebRTC', 'Windows', 'Computer Vision'],
+                }
+              : project,
         ),
     ],
     [projects],

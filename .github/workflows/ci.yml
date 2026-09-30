@@ -30,6 +30,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Tests + coverage 80%
+        run: node --test --experimental-test-coverage --test-coverage-lines=80 tests/repository-quality.test.mjs
+
       - name: Build
         run: npm run build
         env:

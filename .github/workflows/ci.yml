@@ -22,7 +22,7 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Typecheck
         run: npm run typecheck
@@ -30,7 +30,7 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Tests + coverage 80%
+      - name: Infrastructure unit tests + coverage 80%
         run: node --test --experimental-test-coverage --test-coverage-lines=80 tests/repository-quality.test.mjs
 
       - name: Build

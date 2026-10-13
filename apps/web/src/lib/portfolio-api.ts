@@ -53,6 +53,8 @@ const VERIFIED_DEMOS: Record<string, string> = {
   'leoo1992/quake-vision': 'https://quake-vision-web.vercel.app',
   'leoo1992/sentinela-sst': 'https://sentinela-sst-git-master-leoo1992s-projects.vercel.app/',
   'leoo1992/gesture-control': 'https://gesture-control-pi.vercel.app',
+  'leoo1992/PokeDex': 'https://pokedex-leoo1992.vercel.app',
+  'leoo1992/Kanban_React': 'https://kanban-react-leoo1992.vercel.app',
 };
 
 export async function getPortfolio(): Promise<PortfolioResponse> {

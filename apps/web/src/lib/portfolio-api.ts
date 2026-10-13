@@ -38,10 +38,7 @@ const GITHUB_USERNAME = 'leoo1992';
 const VERIFIED_PRIVATE_REPO_COUNT = 4;
 
 const VERIFIED_DEMOS: Record<string, string> = {
-  'leoo1992/POC-Redux-App-Viagem': 'https://poc-redux-app-viagem-leoo1992s-projects.vercel.app',
-  'leoo1992/animaisFantasticos': 'https://animais-fantasticos-leoo1992s-projects.vercel.app',
   'leoo1992/Calculadora_IMC': 'https://calculadora-imc-leoo1992s-projects.vercel.app',
-  'leoo1992/CalculadoraJavaScript': 'https://calculadorajavascript-leoo1992s-projects.vercel.app',
   'leoo1992/POC-NEXT-DOG-SOCIAL-NETWORK': 'https://dogs-next-final-blue.vercel.app',
   'leoo1992/biblioteca': 'https://biblioteca-pi.vercel.app',
   'leoo1992/GuessNumber': 'https://guess-number-leoo1992.vercel.app',

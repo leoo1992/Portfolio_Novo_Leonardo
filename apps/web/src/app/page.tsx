@@ -8,15 +8,6 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/leocustodio1992/';
 
 export default async function HomePage() {
   const portfolio = await getPortfolio();
-  const projectCount = portfolio.projects.length;
-  const languageCount = new Set(
-    portfolio.projects.map((project) => project.language).filter(Boolean),
-  ).size;
-  const starsTotal = portfolio.projects.reduce(
-    (total, project) => total + project.stars,
-    0,
-  );
-
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -31,9 +22,6 @@ export default async function HomePage() {
       <PortfolioRouter
         profile={portfolio.profile}
         projects={portfolio.projects}
-        projectCount={projectCount}
-        languageCount={languageCount}
-        starsTotal={starsTotal}
       />
       <script
         type="application/ld+json"

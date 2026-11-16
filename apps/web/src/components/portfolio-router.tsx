@@ -66,9 +66,9 @@ export function PortfolioRouter({
 
   const homeView = (
     <main id="conteudo">
-      <Hero
-        profile={profile}
-      />
+      <Hero profile={profile} />
+      <ProfessionalProfile projects={projects} />
+      <ProjectsBrowser />
     </main>
   );
 

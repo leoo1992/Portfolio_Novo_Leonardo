@@ -80,20 +80,7 @@ export function Hero({
               </div>
             </div>
 
-            <dl className="hero-metrics hero-metrics-rail" aria-label="Portfolio metrics">
-              <div>
-                <dt>{t('repositories')}</dt>
-                <dd>{String(projectCount).padStart(2, '0')}</dd>
-              </div>
-              <div>
-                <dt>{t('technologies')}</dt>
-                <dd>{String(languageCount).padStart(2, '0')}</dd>
-              </div>
-              <div>
-                <dt>{t('stars')}</dt>
-                <dd>{String(starsTotal).padStart(2, '0')}</dd>
-              </div>
-            </dl>
+            <p className="hero-copy-secondary">Construo aplicações que conectam regras de negócio, dados e experiência de uso.</p>
           </div>
 
           <div className="identity-orbit" data-reveal>

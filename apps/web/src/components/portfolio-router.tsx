@@ -20,9 +20,6 @@ import { ProfessionalProfile } from './professional-profile';
 interface PortfolioRouterProps {
   profile: GitHubProfile;
   projects: PortfolioProject[];
-  projectCount: number;
-  languageCount: number;
-  starsTotal: number;
 }
 
 function subscribeHash(callback: () => void) {
@@ -42,9 +39,6 @@ function toRoutePath(to: To) {
 export function PortfolioRouter({
   profile,
   projects,
-  projectCount,
-  languageCount,
-  starsTotal,
 }: PortfolioRouterProps) {
   const location = useSyncExternalStore(subscribeHash, readHashRoute, () => '/');
 
@@ -74,9 +68,6 @@ export function PortfolioRouter({
     <main id="conteudo">
       <Hero
         profile={profile}
-        projectCount={projectCount}
-        languageCount={languageCount}
-        starsTotal={starsTotal}
       />
     </main>
   );

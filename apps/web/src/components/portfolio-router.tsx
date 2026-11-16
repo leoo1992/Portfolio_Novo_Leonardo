@@ -80,7 +80,7 @@ export function PortfolioRouter({
 
   const projectsView = (
     <main id="conteudo" className="router-projects-view">
-      <ProjectsBrowser projects={projects} />
+      <ProjectsBrowser />
     </main>
   );
 

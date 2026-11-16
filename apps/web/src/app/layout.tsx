@@ -46,6 +46,13 @@ export const metadata: Metadata = {
     siteName: 'Leonardo Santos Custódio',
     locale: 'pt_BR',
     type: 'website',
+    images: [{ url: '/og-image.svg', width: 1200, height: 630, alt: 'Leonardo Santos Custódio — Software Developer' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Leonardo Santos Custódio | Software Developer',
+    description: 'Portfólio de projetos web, interfaces, APIs e engenharia de software.',
+    images: ['/og-image.svg'],
   },
   robots: { index: true, follow: true },
 };

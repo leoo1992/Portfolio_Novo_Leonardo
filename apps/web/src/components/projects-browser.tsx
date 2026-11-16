@@ -1,292 +1,83 @@
 'use client';
 
-import { useDeferredValue, useMemo, type CSSProperties } from 'react';
-import type { PortfolioProject } from '@/types/github';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { resetFilters, setLanguage, setQuery } from '@/store/projects-slice';
 import { useExperience } from './experience-provider';
-import { ArrowUpRightIcon, ForkIcon, SearchIcon, StarIcon } from './icons';
 
-function formatDate(value: string, locale: string) {
-  return new Intl.DateTimeFormat(locale, {
-    month: 'short',
-    year: 'numeric',
-  }).format(new Date(value));
-}
+const projects = [
+  {
+    id:'sentinela-sst', name:'Sentinela SST',
+    problemPt:'Apoia inspeções visuais de SST e análises posturais com visão computacional, sem enviar frames de vídeo à API.',
+    problemEn:'Supports visual OHS inspections and posture analysis with computer vision, without sending video frames to the API.',
+    stack:'Next.js · React · TypeScript · TensorFlow.js · MoveNet · Python · FastAPI',
+    demo:'https://sentinela-sst-zeta.vercel.app', code:'https://github.com/leoo1992/sentinela-sst',
+  },
+  {
+    id:'sistema_ponto', name:'Sistema Ponto',
+    problemPt:'Centraliza a experiência de registro e acompanhamento de ponto integrada a uma API REST Java/Spring.',
+    problemEn:'Provides a time-recording and attendance interface integrated with a Java/Spring REST API.',
+    stack:'React · TypeScript · Vite · Material UI · DaisyUI · Axios',
+    demo:'https://sistema-ponto-two.vercel.app', code:'https://github.com/leoo1992/sistema_ponto',
+  },
+  {
+    id:'hero-app-back', name:'Hero App',
+    problemPt:'Organiza usuários, papéis, heróis, projetos e batalhas em uma API com autenticação e persistência relacional.',
+    problemEn:'Manages users, roles, heroes, projects, and battles through an API with authentication and relational persistence.',
+    stack:'Node.js · TypeScript · NestJS · PostgreSQL · TypeORM · JWT · Docker',
+    demo:null, code:'https://github.com/leoo1992/hero-app-back', extra:'https://github.com/leoo1992/hero-app-front',
+  },
+  {
+    id:'pulsebi', name:'PulseBI',
+    problemPt:'Transforma dados sintéticos de negócio em indicadores executivos, análises de receita, clientes e exploração self-service.',
+    problemEn:'Turns synthetic business data into executive KPIs, revenue and customer analysis, and self-service exploration.',
+    stack:'Next.js · React · TypeScript · Tailwind CSS · SVG · Route Handlers',
+    demo:'https://pulsebi-three.vercel.app', code:'https://github.com/leoo1992/pulsebi',
+  },
+  {
+    id:'quake-vision', name:'Quake Vision',
+    problemPt:'Apresenta eventos sísmicos reais do USGS em mapa interativo, com filtros por magnitude, profundidade e período.',
+    problemEn:'Displays real USGS seismic events on an interactive map with magnitude, depth, and time filters.',
+    stack:'Next.js · React · TypeScript · NestJS · Redux Toolkit · MapLibre · Recharts',
+    demo:'https://quake-vision-web.vercel.app', code:'https://github.com/leoo1992/quake-vision',
+  },
+  {
+    id:'Leo-AI-poc', name:'Leo AI POC',
+    problemPt:'Demonstra um assistente conversacional com entrada por texto e voz e integração server-side com modelo generativo.',
+    problemEn:'Demonstrates a conversational assistant with text and voice input and a server-side generative AI integration.',
+    stack:'React · TypeScript · Vite · Tailwind CSS · DaisyUI · Google Gemini',
+    demo:'https://chat-gpt-poc-beta.vercel.app', code:'https://github.com/leoo1992/Leo-AI-poc',
+  },
+];
 
-function projectMark(name: string) {
-  const clean = name.replace(/[^a-zA-Z0-9]/g, '');
-  return (clean.slice(0, 2) || 'PR').toUpperCase();
-}
-
-interface DisplayProject extends PortfolioProject {
-  privateWork?: boolean;
-  completedWork?: boolean;
-}
-
-const FLOWPILOT_PROJECT: DisplayProject = {
-  id: -2,
-  name: 'FlowPilot',
-  fullName: 'leoo1992/workflows-poc',
-  description:
-    'Editor visual de automação de workflows com nodes conectáveis, validação de grafos, execução simulada, logs e persistência local.',
-  url: 'https://github.com/leoo1992/workflows-poc',
-  homepage: 'https://workflows-poc-ebon.vercel.app/',
-  language: 'TypeScript',
-  topics: ['Next.js', 'TypeScript', 'React Flow', 'Automação'],
-  stars: 0,
-  forks: 0,
-  isFork: false,
-  archived: false,
-  updatedAt: '2026-09-25T13:14:54Z',
-};
-
-const LEO_AI_PROJECT: DisplayProject = {
-  id: -3,
-  name: 'Léo IA',
-  fullName: 'leoo1992/Leo-AI-poc',
-  description:
-    'Assistente conversacional com interface responsiva, entrada por texto e voz, temas, idiomas e experiência de chat interativa.',
-  url: 'https://github.com/leoo1992/Leo-AI-poc',
-  homepage: 'https://chat-gpt-poc-beta.vercel.app/',
-  language: 'TypeScript',
-  topics: ['React', 'TypeScript', 'IA', 'Voice UI'],
-  stars: 1,
-  forks: 0,
-  isFork: false,
-  archived: false,
-  updatedAt: '2026-09-28T03:46:28Z',
-};
-
-const LEGGO_PROJECT: DisplayProject = {
-  id: -1,
-  name: 'LEGGO Construções',
-  fullName: 'Projeto comercial privado / LEGGO Construções',
-  description:
-    'Site institucional para construtora especializada em soluções ICF, com apresentação de serviços, obras, modelos e canais de contato.',
-  url: 'https://www.construtoraleggo.com.br/',
-  homepage: 'https://www.construtoraleggo.com.br/',
-  language: null,
-  topics: ['Projeto comercial', 'Site institucional', 'ICF', 'Responsivo'],
-  stars: 0,
-  forks: 0,
-  isFork: false,
-  archived: false,
-  updatedAt: '1970-01-01T00:00:00Z',
-  privateWork: true,
-  completedWork: true,
-};
-
-export function ProjectsBrowser({ projects }: { projects: PortfolioProject[] }) {
-  const dispatch = useAppDispatch();
-  const ui = useAppSelector((state) => state.projectsUi);
-  const deferredQuery = useDeferredValue(ui.query);
-  const { localeTag, t } = useExperience();
-
-  const demoProjects = useMemo<DisplayProject[]>(
-    () => [
-      LEGGO_PROJECT,
-      LEO_AI_PROJECT,
-      FLOWPILOT_PROJECT,
-      ...projects
-        .filter((project) => {
-          const name = project.name.toLocaleLowerCase();
-
-          return (
-            name !== 'workflows-poc' &&
-            name !== 'leo-ai-poc' &&
-            Boolean(project.homepage)
-          );
-        })
-        .map((project) =>
-          project.fullName === 'leoo1992/sentinela-sst'
-            ? {
-                ...project,
-                description:
-                  'Ferramenta de visão computacional focada em inspeção visual de EPI por câmera ou imagem, identificando óculos, capacete, luvas e protetor auricular (plug ou abafador).',
-                topics: ['SST', 'EPI', 'Visão computacional', 'Segurança do Trabalho'],
-              }
-            : project.fullName === 'leoo1992/gesture-control'
-              ? {
-                  ...project,
-                  name: 'Gesture Control',
-                  description:
-                    'Controle por gestos com câmera do celular, rastreamento de mão em tempo real, conexão WebRTC e integração nativa para controlar o cursor do Windows com overlay global.',
-                  topics: ['MediaPipe', 'WebRTC', 'Windows', 'Computer Vision'],
-                }
-              : project,
-        ),
-    ],
-    [projects],
-  );
-
-  const languages = useMemo(
-    () =>
-      [...new Set(demoProjects.map((project) => project.language).filter(Boolean) as string[])].sort(),
-    [demoProjects],
-  );
-
-  const filtered = useMemo(() => {
-    const query = deferredQuery.trim().toLocaleLowerCase(localeTag);
-
-    return [...demoProjects]
-      .filter((project) => ui.language === 'all' || project.language === ui.language)
-      .filter((project) => {
-        if (!query) return true;
-
-        const haystack = [
-          project.name,
-          project.description ?? '',
-          project.language ?? '',
-          ...project.topics,
-        ]
-          .join(' ')
-          .toLocaleLowerCase(localeTag);
-
-        return haystack.includes(query);
-      })
-      .sort((a, b) => {
-        if (a.privateWork !== b.privateWork) return a.privateWork ? -1 : 1;
-
-        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-      });
-  }, [deferredQuery, demoProjects, localeTag, ui.language]);
-
+export function ProjectsBrowser() {
+  const { localeTag } = useExperience();
+  const en = localeTag.toLowerCase().startsWith('en');
   return (
-    <section id="projetos" className="projects-section work-index" aria-labelledby="projects-title">
+    <section id="projetos" className="projects-section featured-projects-section" aria-labelledby="projects-title">
       <div className="shell">
-        <div className="work-heading" data-reveal>
-          <div>
-            <p className="eyebrow">SELECTED / WORK</p>
-            <h2 id="projects-title">{t('projectsTitle')}</h2>
-          </div>
-          <div className="work-heading-side">
-            <p>Um índice vivo de produtos, experimentos e sistemas.</p>
-            <span>{String(filtered.length).padStart(2, '0')} / {String(demoProjects.length).padStart(2, '0')}</span>
-          </div>
+        <div className="work-heading">
+          <div><p className="eyebrow">SELECTED / WORK</p><h2 id="projects-title">{en ? 'Selected projects' : 'Projetos em destaque'}</h2></div>
+          <div className="work-heading-side"><p>{en ? 'Six public projects and their technical context.' : 'Seis projetos públicos e seu contexto técnico.'}</p><span>06 / 06</span></div>
         </div>
-
-        <div className="work-toolbar" data-reveal>
-          <label className="work-search">
-            <SearchIcon />
-            <span className="sr-only">{t('searchLabel')}</span>
-            <input
-              type="search"
-              value={ui.query}
-              onChange={(event) => dispatch(setQuery(event.target.value))}
-              placeholder={t('searchPlaceholder')}
-              autoComplete="off"
-            />
-          </label>
-
-          <label className="work-language">
-            <span className="sr-only">{t('languageFilter')}</span>
-            <select
-              aria-label={t('languageFilter')}
-              value={ui.language}
-              onChange={(event) => dispatch(setLanguage(event.target.value))}
-            >
-              <option value="all">{t('allLanguages')}</option>
-              {languages.map((language) => (
-                <option key={language}>{language}</option>
-              ))}
-            </select>
-          </label>
+        <div className="featured-project-grid">
+          {projects.map((project,index)=>(
+            <article className="featured-project-card" key={project.id}>
+              <div className="featured-project-image" role="img" aria-label={en ? 'Demo screenshot not yet provided' : 'Screenshot da demonstração ainda não fornecido'}>
+                <span>{en ? 'DEMO SCREENSHOT' : 'SCREENSHOT DA DEMO'}</span>
+                <strong>{en ? 'Image placeholder' : 'Espaço reservado para imagem'}</strong>
+              </div>
+              <div className="featured-project-content">
+                <p className="featured-project-index">{String(index+1).padStart(2,'0')} / 06</p>
+                <h3>{project.name}</h3>
+                <p>{en ? project.problemEn : project.problemPt}</p>
+                <p className="featured-project-stack"><strong>Stack:</strong> {project.stack}</p>
+                <div className="featured-project-links">
+                  {project.demo ? <a href={project.demo} target="_blank" rel="noreferrer">{en ? 'Live demo' : 'Demo'} ↗</a> : <span>{en ? 'Demo not published' : 'Demo não publicada'}</span>}
+                  <a href={project.code} target="_blank" rel="noreferrer">{en ? 'Source code' : 'Código'} ↗</a>
+                  {project.extra ? <a href={project.extra} target="_blank" rel="noreferrer">{en ? 'Front-end' : 'Front-end'} ↗</a> : null}
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
-
-        {filtered.length === 0 ? (
-          <div className="empty-state work-empty" role="status">
-            <p>{t('emptyTitle')}</p>
-            <button className="text-button" type="button" onClick={() => dispatch(resetFilters())}>
-              {t('clearFilters')}
-            </button>
-          </div>
-        ) : (
-          <div className="work-list">
-            {filtered.map((project, index) => (
-              <article
-                className={project.privateWork ? 'work-item work-item-private' : 'work-item'}
-                data-reveal
-                key={project.id}
-                style={{ '--work-index': index } as CSSProperties}
-              >
-                <div className="work-number" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-
-                <div className="work-main">
-                  <div className="work-meta">
-                    <span>
-                      {project.privateWork
-                        ? t('privateProject')
-                        : project.language ?? t('projectGeneric')}
-                    </span>
-                    {!project.privateWork ? (
-                      <span>{formatDate(project.updatedAt, localeTag)}</span>
-                    ) : null}
-                    {project.completedWork ? (
-                      <span className="work-completed-chip">{t('completedWork')}</span>
-                    ) : null}
-                    {project.archived ? <span>{t('archived')}</span> : null}
-                  </div>
-
-                  <h3>{project.name}</h3>
-
-                  <p className="work-description">
-                    {project.description ?? t('projectFallback')}
-                  </p>
-
-                  {project.topics.length > 0 ? (
-                    <ul className="work-topics" aria-label={t('topicsLabel')}>
-                      {project.topics.slice(0, 4).map((topic) => (
-                        <li key={topic}>{topic}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-
-                <div className="work-poster" aria-hidden="true">
-                  <span className="work-poster-mark">{projectMark(project.name)}</span>
-                  <span className="work-poster-language">
-                    {project.privateWork ? 'CLIENT WORK' : project.language ?? 'CODE'}
-                  </span>
-                  {project.completedWork ? (
-                    <span className="work-completed-ribbon">{t('completedWork')}</span>
-                  ) : null}
-                  <i className="work-poster-orbit" />
-                  <i className="work-poster-cross work-poster-cross-a" />
-                  <i className="work-poster-cross work-poster-cross-b" />
-                </div>
-
-                <div className="work-side">
-                  <div className="work-stats">
-                    {project.privateWork ? (
-                      <span className="work-client-label">{t('commercialDelivery')}</span>
-                    ) : (
-                      <>
-                        <span><StarIcon /> {project.stars}</span>
-                        <span><ForkIcon /> {project.forks}</span>
-                      </>
-                    )}
-                  </div>
-
-                  <div className="work-actions">
-                    <a href={project.homepage!} target="_blank" rel="noreferrer">
-                      <span>{t('demo')}</span>
-                      <ArrowUpRightIcon />
-                    </a>
-                    {!project.privateWork ? (
-                      <a href={project.url} target="_blank" rel="noreferrer">
-                        <span>{t('code')}</span>
-                        <ArrowUpRightIcon />
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );

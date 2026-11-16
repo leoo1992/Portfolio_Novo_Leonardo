@@ -33,8 +33,8 @@ export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
           <p>{en ? 'Software developer focused on web applications, interfaces, APIs, and business systems.' : 'Desenvolvedor de software com foco em aplicações web, interfaces, APIs e sistemas corporativos.'}</p>
           <p>{en ? 'I connect business requirements, application logic, integrations, and user experience.' : 'Conecto requisitos de negócio, lógica de aplicação, integrações e experiência do usuário.'}</p>
           <div className="profile-facts">
-            <span><strong>{en ? 'Location' : 'Localização'}</strong><!-- PREENCHER --></span>
-            <span><strong>{en ? 'Education' : 'Formação'}</strong><!-- PREENCHER --></span>
+            <span><strong>{en ? 'Location' : 'Localização'}</strong>{/* <!-- PREENCHER: localização --> */}</span>
+            <span><strong>{en ? 'Education' : 'Formação'}</strong>{/* <!-- PREENCHER: formação --> */}</span>
             <span><strong>{en ? 'Focus' : 'Foco'}</strong>Full Stack · Web · APIs</span>
           </div>
         </div>

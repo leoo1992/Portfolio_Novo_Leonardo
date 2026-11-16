@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { PortfolioProject } from '@/types/github';
+import { useExperience } from './experience-provider';
 
 const skills = [
   {name:'Oracle / PL/SQL', keys:['oracle','pl/sql','sql']},
@@ -12,10 +13,10 @@ const skills = [
   {name:'BI / Dados', keys:['bi','data','dashboard']},
 ];
 
-const experience: string[][] = [];
-
 export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
   const [active,setActive]=useState<string|null>(null);
+  const { localeTag } = useExperience();
+  const en = localeTag.toLowerCase().startsWith('en');
   const matching = active ? projects.filter(p => {
     const hay=[p.name,p.description,p.language,...(p.topics??[])].filter(Boolean).join(' ').toLowerCase();
     return skills.find(s=>s.name===active)?.keys.some(k=>hay.includes(k)) ?? false;
@@ -23,18 +24,18 @@ export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
 
   return <>
     <section id="sobre" className="professional-section shell" aria-labelledby="about-title">
-      <div className="section-kicker" data-reveal>01 / PERFIL PROFISSIONAL</div>
+      <div className="section-kicker" data-reveal>01 / {en ? 'PROFESSIONAL PROFILE' : 'PERFIL PROFISSIONAL'}</div>
       <div className="professional-grid">
         <div data-reveal>
-          <h2 id="about-title">Software, dados e produto — da regra de negócio à interface.</h2>
+          <h2 id="about-title">{en ? 'Software, data, and product — from business rules to user interface.' : 'Software, dados e produto — da regra de negócio à interface.'}</h2>
         </div>
         <div className="professional-copy" data-reveal>
-          <p>Desenvolvedor Full Stack com experiência em sistemas corporativos, Business Intelligence e aplicações web. Atuo entre banco de dados, lógica de negócio, integrações, automações e experiência do usuário.</p>
-          <p>Minha trajetória combina Oracle/PL/SQL e processamento de dados com JavaScript/TypeScript, React, Next.js, Python, APIs e engenharia de software.</p>
+          <p>{en ? 'Software developer focused on web applications, interfaces, APIs, and business systems.' : 'Desenvolvedor de software com foco em aplicações web, interfaces, APIs e sistemas corporativos.'}</p>
+          <p>{en ? 'I connect business requirements, application logic, integrations, and user experience.' : 'Conecto requisitos de negócio, lógica de aplicação, integrações e experiência do usuário.'}</p>
           <div className="profile-facts">
-            <span><strong>Base</strong>Criciúma · SC · Brasil</span>
-            <span><strong>Formação</strong>Ciência da Computação · UNESC</span>
-            <span><strong>Foco</strong>Full Stack · BI · Integrações</span>
+            <span><strong>{en ? 'Location' : 'Localização'}</strong><!-- PREENCHER --></span>
+            <span><strong>{en ? 'Education' : 'Formação'}</strong><!-- PREENCHER --></span>
+            <span><strong>{en ? 'Focus' : 'Foco'}</strong>Full Stack · Web · APIs</span>
           </div>
         </div>
       </div>
@@ -42,36 +43,62 @@ export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
 
     <section id="experiencia" className="professional-section experience-section" aria-labelledby="experience-title">
       <div className="shell">
-        <div className="section-kicker" data-reveal>02 / EXPERIÊNCIA</div>
-        <h2 id="experience-title" data-reveal>Experiência em produto e produção.</h2>
+        <div className="section-kicker" data-reveal>02 / {en ? 'EXPERIENCE' : 'EXPERIÊNCIA'}</div>
+        <h2 id="experience-title" data-reveal>{en ? 'Professional experience' : 'Experiência profissional'}</h2>
         <div className="timeline">
-          {experience.length ? experience.map(([period,company,role,copy])=><article className="timeline-item" key={company} data-reveal>
-            <time>{period}</time><div><span>{company}</span><h3>{role}</h3><p>{copy}</p></div>
-          </article>) : <p data-reveal>Informações profissionais a preencher pelo titular. {/* <!-- PREENCHER: experiência --> */}</p>}
+          <article className="timeline-item" data-reveal>
+            <time><!-- PREENCHER: período --></time>
+            <div>
+              <span><!-- PREENCHER: empresa --></span>
+              <h3><!-- PREENCHER: cargo --></h3>
+              <ul><li><!-- PREENCHER: destaque 1 --></li><li><!-- PREENCHER: destaque 2 --></li><li><!-- PREENCHER: destaque 3 --></li></ul>
+            </div>
+          </article>
+          <article className="timeline-item" data-reveal>
+            <time>{en ? 'Freelance / Current project' : 'Freelance / Projeto entregue'}</time>
+            <div>
+              <span><a href="https://www.construtoraleggo.com.br/" target="_blank" rel="noreferrer">LEGGO Construções</a></span>
+              <h3>{en ? 'Website development' : 'Desenvolvimento de site institucional'}</h3>
+              <p>{en ? 'Next.js corporate website, image optimization, and on-page SEO. Live in production for the client.' : 'Site institucional em Next.js, otimização de imagens e SEO on-page. Projeto em produção para cliente.'}</p>
+              <ul><li>Next.js</li><li>{en ? 'Image optimization' : 'Otimização de imagens'}</li><li>SEO on-page</li></ul>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="stack" className="professional-section shell stack-section" aria-labelledby="stack-title">
       <div className="section-kicker" data-reveal>03 / STACK EXPLORER</div>
-      <div className="stack-heading" data-reveal><h2 id="stack-title">Tecnologia conectada a entregas reais.</h2><p>Selecione uma competência para relacioná-la aos projetos públicos do portfólio.</p></div>
+      <div className="stack-heading" data-reveal><h2 id="stack-title">{en ? 'Technology connected to real work.' : 'Tecnologia conectada a entregas reais.'}</h2><p>{en ? 'Select a skill to relate it to public portfolio projects.' : 'Selecione uma competência para relacioná-la aos projetos públicos do portfólio.'}</p></div>
       <div className="skill-grid" data-reveal>
         {skills.map(skill=><button key={skill.name} className={active===skill.name?'skill-chip active':'skill-chip'} onClick={()=>setActive(active===skill.name?null:skill.name)} aria-pressed={active===skill.name}>{skill.name}</button>)}
       </div>
       <div className="skill-results" aria-live="polite">
-        {active && <><p><strong>{active}</strong> · {matching.length ? 'projetos relacionados' : 'competência demonstrada principalmente na experiência profissional'}</p>{matching.length>0&&<div className="skill-projects">{matching.map(p=><a key={p.name} href={p.url} target="_blank" rel="noreferrer">{p.name}<span>↗</span></a>)}</div>}</>}
+        {active && <><p><strong>{active}</strong> · {matching.length ? (en ? 'related projects' : 'projetos relacionados') : (en ? 'No public project mapped to this skill yet.' : 'Nenhum projeto público relacionado a esta competência.')}</p>{matching.length>0&&<div className="skill-projects">{matching.map(p=><a key={p.name} href={p.url} target="_blank" rel="noreferrer">{p.name}<span>↗</span></a>)}</div>}</>}
       </div>
     </section>
 
     <section className="professional-section shell education-section" aria-labelledby="education-title">
-      <div className="section-kicker" data-reveal>04 / FORMAÇÃO</div>
-      <h2 id="education-title" data-reveal>Formação contínua.</h2>
+      <div className="section-kicker" data-reveal>04 / {en ? 'EDUCATION' : 'FORMAÇÃO'}</div>
+      <h2 id="education-title" data-reveal>{en ? 'Education' : 'Formação acadêmica'}</h2>
       <div className="education-grid" data-reveal>
-        <p>Informações de formação a preencher pelo titular. {/* <!-- PREENCHER: formação --> */}</p>
+        <article><span><!-- PREENCHER: período --></span><h3><!-- PREENCHER: curso --></h3><p><!-- PREENCHER: instituição --></p><ul><li><!-- PREENCHER: destaque 1 --></li><li><!-- PREENCHER: destaque 2 --></li></ul></article>
+        <article><span><!-- PREENCHER: período --></span><h3><!-- PREENCHER: curso --></h3><p><!-- PREENCHER: instituição --></p><ul><li><!-- PREENCHER: destaque 1 --></li><li><!-- PREENCHER: destaque 2 --></li></ul></article>
       </div>
     </section>
 
-    <section className="terminal-section shell" aria-label="Terminal interativo" data-reveal>
+    <section id="contato" className="professional-section shell education-section" aria-labelledby="contact-title">
+      <div className="section-kicker" data-reveal>05 / {en ? 'CONTACT' : 'CONTATO'}</div>
+      <h2 id="contact-title" data-reveal>{en ? 'Get in touch.' : 'Entre em contato.'}</h2>
+      <div className="education-grid" data-reveal>
+        <p><a href="https://www.linkedin.com/in/leocustodio1992" target="_blank" rel="noreferrer">LinkedIn</a></p>
+        <p><a href="https://github.com/leoo1992" target="_blank" rel="noreferrer">GitHub</a></p>
+        <p>{en ? 'Email' : 'E-mail'}: <!-- PREENCHER: e-mail --></p>
+        <p>{en ? 'Resume (PDF)' : 'Currículo (PDF)'}: <!-- PREENCHER: link do PDF --></p>
+      </div>
+    </section>
+
+    <section className="terminal-section shell" aria-label={en ? 'Interactive terminal' : 'Terminal interativo'} data-reveal>
       <Terminal />
     </section>
   </>;

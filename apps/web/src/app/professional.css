@@ -10,3 +10,48 @@
 @media(max-width:430px){.skill-grid{grid-template-columns:1fr}.skill-chip{min-height:52px}.profile-facts span{grid-template-columns:1fr;gap:3px}.professional-section h2{font-size:clamp(32px,10vw,44px)}}
 @media(hover:none),(pointer:coarse){.skill-chip:hover,.timeline-item:hover{transform:none;padding-inline:0}.developer-scene{pointer-events:none}}
 @media(prefers-reduced-motion:reduce){.developer-scene{display:none}.skill-chip,.timeline-item{transition:none}}
+
+
+/* Curated six-project portfolio cards */
+.featured-project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.featured-project-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line, rgba(255,255,255,.14));
+  border-radius: 1rem;
+  background: var(--surface, rgba(255,255,255,.035));
+}
+.featured-project-image {
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  padding: 1.5rem;
+  color: var(--muted, #999);
+  background: repeating-linear-gradient(135deg, transparent 0 12px, rgba(127,127,127,.07) 12px 13px);
+  border-bottom: 1px dashed var(--line, rgba(255,255,255,.2));
+  text-align: center;
+}
+.featured-project-image span, .featured-project-index {
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.featured-project-image strong { font-size: .95rem; font-weight: 500; }
+.featured-project-content { padding: 1.4rem; }
+.featured-project-content h3 { margin: .4rem 0 .8rem; font-size: clamp(1.25rem, 2vw, 1.7rem); }
+.featured-project-content > p:not(.featured-project-index) { line-height: 1.65; }
+.featured-project-stack { margin-top: 1rem; font-size: .9rem; opacity: .86; }
+.featured-project-links { display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; margin-top: 1.2rem; }
+.featured-project-links a { text-decoration: underline; text-underline-offset: .25em; }
+.featured-project-links span { opacity: .65; font-size: .9rem; }
+@media (max-width: 760px) {
+  .featured-project-grid { grid-template-columns: 1fr; }
+}

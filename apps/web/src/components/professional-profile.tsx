@@ -47,11 +47,11 @@ export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
         <h2 id="experience-title" data-reveal>{en ? 'Professional experience' : 'Experiência profissional'}</h2>
         <div className="timeline">
           <article className="timeline-item" data-reveal>
-            <time><!-- PREENCHER: período --></time>
+            <time>{/* <!-- PREENCHER: período --> */}</time>
             <div>
-              <span><!-- PREENCHER: empresa --></span>
-              <h3><!-- PREENCHER: cargo --></h3>
-              <ul><li><!-- PREENCHER: destaque 1 --></li><li><!-- PREENCHER: destaque 2 --></li><li><!-- PREENCHER: destaque 3 --></li></ul>
+              <span>{/* <!-- PREENCHER: empresa --> */}</span>
+              <h3>{/* <!-- PREENCHER: cargo --> */}</h3>
+              <ul><li>{/* <!-- PREENCHER: destaque 1 --> */}</li><li>{/* <!-- PREENCHER: destaque 2 --> */}</li><li>{/* <!-- PREENCHER: destaque 3 --> */}</li></ul>
             </div>
           </article>
           <article className="timeline-item" data-reveal>
@@ -82,8 +82,8 @@ export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
       <div className="section-kicker" data-reveal>04 / {en ? 'EDUCATION' : 'FORMAÇÃO'}</div>
       <h2 id="education-title" data-reveal>{en ? 'Education' : 'Formação acadêmica'}</h2>
       <div className="education-grid" data-reveal>
-        <article><span><!-- PREENCHER: período --></span><h3><!-- PREENCHER: curso --></h3><p><!-- PREENCHER: instituição --></p><ul><li><!-- PREENCHER: destaque 1 --></li><li><!-- PREENCHER: destaque 2 --></li></ul></article>
-        <article><span><!-- PREENCHER: período --></span><h3><!-- PREENCHER: curso --></h3><p><!-- PREENCHER: instituição --></p><ul><li><!-- PREENCHER: destaque 1 --></li><li><!-- PREENCHER: destaque 2 --></li></ul></article>
+        <article><span>{/* <!-- PREENCHER: período --> */}</span><h3>{/* <!-- PREENCHER: curso --> */}</h3><p>{/* <!-- PREENCHER: instituição --> */}</p><ul><li>{/* <!-- PREENCHER: destaque 1 --> */}</li><li>{/* <!-- PREENCHER: destaque 2 --> */}</li></ul></article>
+        <article><span>{/* <!-- PREENCHER: período --> */}</span><h3>{/* <!-- PREENCHER: curso --> */}</h3><p>{/* <!-- PREENCHER: instituição --> */}</p><ul><li>{/* <!-- PREENCHER: destaque 1 --> */}</li><li>{/* <!-- PREENCHER: destaque 2 --> */}</li></ul></article>
       </div>
     </section>
 
@@ -93,8 +93,8 @@ export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
       <div className="education-grid" data-reveal>
         <p><a href="https://www.linkedin.com/in/leocustodio1992" target="_blank" rel="noreferrer">LinkedIn</a></p>
         <p><a href="https://github.com/leoo1992" target="_blank" rel="noreferrer">GitHub</a></p>
-        <p>{en ? 'Email' : 'E-mail'}: <!-- PREENCHER: e-mail --></p>
-        <p>{en ? 'Resume (PDF)' : 'Currículo (PDF)'}: <!-- PREENCHER: link do PDF --></p>
+        <p>{en ? 'Email' : 'E-mail'}: {/* <!-- PREENCHER: e-mail --> */}</p>
+        <p>{en ? 'Resume (PDF)' : 'Currículo (PDF)'}: {/* <!-- PREENCHER: link do PDF --> */}</p>
       </div>
     </section>
 

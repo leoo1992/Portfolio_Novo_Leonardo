@@ -12,16 +12,10 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/leocustodio1992/';
 
 interface HeroProps {
   profile: GitHubProfile;
-  projectCount: number;
-  languageCount: number;
-  starsTotal: number;
 }
 
 export function Hero({
   profile,
-  projectCount,
-  languageCount,
-  starsTotal,
 }: HeroProps) {
   const { t } = useExperience();
 

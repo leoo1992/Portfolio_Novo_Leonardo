@@ -1,5 +1,7 @@
 # Leonardo Santos Custódio — Portfolio
 
+[English version](README.en.md)
+
 Portfolio full-stack com Next.js, NestJS, Redux Toolkit, React Router e Tailwind CSS.
 
 ## Arquitetura

@@ -1,3 +1,5 @@
+export type PortfolioContentProject = { id: string; name: string; problemPt: string; problemEn: string; stack: string; demo?: string; code: string; extra?: string };
+
 export const profileData = {
   name: 'Leonardo Santos Custódio',
   headline: 'Desenvolvedor de Software',
@@ -47,5 +49,5 @@ export const profileData = {
     { id: 'pulsebi', name: 'PulseBI', problemPt: 'Transforma dados sintéticos de negócio em indicadores executivos, análises de receita, clientes e exploração self-service.', problemEn: 'Turns synthetic business data into executive KPIs, revenue and customer analysis, and self-service exploration.', stack: 'Next.js · React · TypeScript · Tailwind CSS · SVG · Route Handlers', demo: 'https://pulsebi-three.vercel.app', code: 'https://github.com/leoo1992/pulsebi' },
     { id: 'quake-vision', name: 'Quake Vision', problemPt: 'Apresenta eventos sísmicos reais do USGS em mapa interativo, com filtros por magnitude, profundidade e período.', problemEn: 'Displays real USGS seismic events on an interactive map with magnitude, depth, and time filters.', stack: 'Next.js · React · TypeScript · NestJS · Redux Toolkit · MapLibre · Recharts', demo: 'https://quake-vision-web.vercel.app', code: 'https://github.com/leoo1992/quake-vision' },
     { id: 'Leo-AI-poc', name: 'Leo AI POC', problemPt: 'Demonstra um assistente conversacional com entrada por texto e voz e integração server-side com modelo generativo.', problemEn: 'Demonstrates a conversational assistant with text and voice input and a server-side generative AI integration.', stack: 'React · TypeScript · Vite · Tailwind CSS · DaisyUI · Google Gemini', demo: 'https://chat-gpt-poc-beta.vercel.app', code: 'https://github.com/leoo1992/Leo-AI-poc' },
-  ],
-} as const;
+  ] satisfies PortfolioContentProject[],
+};

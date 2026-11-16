@@ -12,12 +12,7 @@ const skills = [
   {name:'BI / Dados', keys:['bi','data','dashboard']},
 ];
 
-const experience = [
-  ['2025 — atual','UpQuery','Desenvolvedor Full Stack','Oracle, PL/SQL, SQL, JavaScript, Python, BI, APIs e integrações em soluções corporativas de produção.'],
-  ['2024 — atual','Consultoria','Desenvolvedor Full Stack','Arquitetura e entrega de aplicação web responsiva com Next.js, React, Tailwind CSS, NestJS e APIs.'],
-  ['2024 — 2025','Agrosys Tecnologia','Desenvolvedor Full Stack','Manutenção evolutiva de ERP e funcionalidades com Progress 4GL, SQL, JavaScript, HTML/CSS e Linux.'],
-  ['2023 — 2024','Useall Software','Desenvolvedor Front-End','SaaS para cooperativas de energia elétrica com JavaScript, Sencha ExtJS, Azure DevOps, CI/CD e Scrum.'],
-];
+const experience: string[][] = [];
 
 export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
   const [active,setActive]=useState<string|null>(null);
@@ -50,9 +45,9 @@ export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
         <div className="section-kicker" data-reveal>02 / EXPERIÊNCIA</div>
         <h2 id="experience-title" data-reveal>Experiência em produto e produção.</h2>
         <div className="timeline">
-          {experience.map(([period,company,role,copy])=><article className="timeline-item" key={company} data-reveal>
+          {experience.length ? experience.map(([period,company,role,copy])=><article className="timeline-item" key={company} data-reveal>
             <time>{period}</time><div><span>{company}</span><h3>{role}</h3><p>{copy}</p></div>
-          </article>)}
+          </article>) : <p data-reveal>Informações profissionais a preencher pelo titular. {/* <!-- PREENCHER: experiência --> */}</p>}
         </div>
       </div>
     </section>
@@ -72,8 +67,7 @@ export function ProfessionalProfile({projects}:{projects:PortfolioProject[]}) {
       <div className="section-kicker" data-reveal>04 / FORMAÇÃO</div>
       <h2 id="education-title" data-reveal>Formação contínua.</h2>
       <div className="education-grid" data-reveal>
-        <article><span>2024 — 2028</span><h3>Ciência da Computação</h3><p>Universidade do Extremo Sul Catarinense — UNESC</p></article>
-        <article><span>2021 — 2023</span><h3>Desenvolvimento de Sistemas</h3><p>SENAI/SC</p></article>
+        <p>Informações de formação a preencher pelo titular. {/* <!-- PREENCHER: formação --> */}</p>
       </div>
     </section>
 

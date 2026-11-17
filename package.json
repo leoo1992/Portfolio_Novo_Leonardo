@@ -3,7 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "packageManager": "npm@10.9.2",
-  "workspaces": ["apps/*"],
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "concurrently -n web,api -c auto \"npm run dev -w @portfolio/web\" \"npm run dev -w @portfolio/api\"",
     "build": "npm run build -w @portfolio/api && npm run build -w @portfolio/web",
@@ -11,7 +13,8 @@
     "typecheck": "npm run typecheck -w @portfolio/api && npm run typecheck -w @portfolio/web",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "agent:vercel": "npx plugins add vercel/vercel-plugin"
+    "agent:vercel": "npx plugins add vercel/vercel-plugin",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

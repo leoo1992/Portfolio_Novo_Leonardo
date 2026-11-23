@@ -16,10 +16,6 @@ export function ProjectsBrowser() {
         <div className="featured-project-grid">
           {profileData.projects.map((project, index) => (
             <article className="featured-project-card" key={project.id}>
-              <div className="featured-project-image" role="img" aria-label={en ? 'Demo screenshot not yet provided' : 'Screenshot da demonstração ainda não fornecido'}>
-                <span>{en ? 'DEMO SCREENSHOT' : 'SCREENSHOT DA DEMO'}</span>
-                <strong>{en ? 'Image placeholder' : 'Espaço reservado para imagem'}</strong>
-              </div>
               <div className="featured-project-content">
                 <p className="featured-project-index">{String(index + 1).padStart(2, '0')} / 06</p>
                 <h3>{project.name}</h3>
